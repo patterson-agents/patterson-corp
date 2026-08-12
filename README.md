@@ -12,9 +12,10 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 
 ![plugins](https://img.shields.io/badge/plugins-2-00A8E1?labelColor=003767)
 ![skills](https://img.shields.io/badge/skills-11-003767)
-![size](https://img.shields.io/badge/total-1.1_MB-147EC2)
+![size](https://img.shields.io/badge/tracked-882_KB-147EC2)
 ![runtime](https://img.shields.io/badge/scripts-TypeScript_·_no_build_step-00817D)
 ![deps](https://img.shields.io/badge/dependencies-none-58585B)
+![gate](https://img.shields.io/badge/gate-verify--all.sh-58585B)
 
 </div>
 
@@ -30,6 +31,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 - [Where it fits](#where-it-fits)
 - [Repository layout](#repository-layout)
 - [Scripts and validation](#scripts-and-validation)
+- [Contributing and governance](#contributing-and-governance)
 - [Provenance and gaps](#provenance-and-gaps)
 - [Brand and licensing](#brand-and-licensing)
 
@@ -134,12 +136,21 @@ patterson-corp/
 │   └── patterson-brand/
 │       ├── skills/<name>/            # SKILL.md · references/ · assets/ · _SOURCES.md
 │       └── agents/                   # brand-compliance-reviewer
-├── managed-settings.d/               # layered settings demonstration
+├── scripts/
+│   ├── check-size.ts                 # 1 MiB tracked-byte budget validator
+│   ├── check-no-binaries.ts          # fonts / office / archive / oversized-raster validator
+│   ├── verify-all.sh                 # the gate battery -- CI and pre-commit both call this
+│   └── tests/                        # TDD fixtures for the two validators above
+├── .github/                          # issue + PR templates, Copilot config, ci.yml
+├── .githooks/                        # pre-commit (opt in: git config core.hooksPath .githooks)
+├── .devcontainer/                    # pinned node:24 devcontainer
+├── openspec/                         # every change proposed and specced before it lands
 ├── docs/
 │   ├── assets/                       # logos (SVG)
 │   ├── diagrams/                     # architecture diagrams
 │   ├── architecture/
 │   └── decisions/                    # ADRs
+├── CONTRIBUTING.md · CODE_OF_CONDUCT.md · SECURITY.md · CODEOWNERS
 └── README.md                         # you are here
 ```
 
@@ -160,7 +171,15 @@ node plugins/patterson-engineering/skills/cicd-pipeline-standards/scripts/check-
 | Exit `2` | could not evaluate |
 | Output | `LEVEL\|file\|line\|rule\|message` |
 
-Run every test suite:
+Run every test suite, plus the repository-wide invariants (theme round-trip, skill
+name-equals-directory, forbidden strings, no binaries, the size budget):
+
+```bash
+sh scripts/verify-all.sh
+```
+
+`scripts/verify-all.sh` is the single gate battery — the same script `.github/workflows/ci.yml`
+and `.githooks/pre-commit` both call. Running individual suites directly still works:
 
 ```bash
 for t in $(find . -name run-tests.sh); do sh "$t"; done
@@ -169,6 +188,27 @@ for t in $(find . -name run-tests.sh); do sh "$t"; done
 > [!CAUTION]
 > Scripts must use **erasable syntax only** — no `enum`, `namespace`, parameter properties, or legacy
 > decorators. Node's type stripping cannot erase these and will throw at runtime.
+
+## Contributing and governance
+
+| File | Purpose |
+|---|---|
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | The OpenSpec proposal workflow, repository conventions, and the test-first requirement |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Contributor Covenant, adapted for a B2B engineering context |
+| [`SECURITY.md`](SECURITY.md) | Private vulnerability reporting; no invented SLA |
+| [`CODEOWNERS`](CODEOWNERS) | A reviewing team for every top-level path (placeholder handles pending real assignment) |
+| [`.github/ISSUE_TEMPLATE/`](.github/ISSUE_TEMPLATE/) | Bug, feature, new-plugin, and new-skill proposal forms |
+| [`.github/pull_request_template.md`](.github/pull_request_template.md) | Checklist including the 2-approver rule, tests, provenance, no-binaries, and the size budget |
+| [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Runs `scripts/verify-all.sh` on every push and pull request, pinned to Node 24 |
+| [`.github/copilot-instructions.md`](.github/copilot-instructions.md) | The same conventions, phrased for an in-editor agent |
+| [`.github/secret_scanning.yml`](.github/secret_scanning.yml) | Excludes the hooks test fixtures' deliberately synthetic secrets |
+| [`.githooks/pre-commit`](.githooks/pre-commit) · [`.pre-commit-config.yaml`](.pre-commit-config.yaml) | The fast local gate (opt in with `git config core.hooksPath .githooks`) |
+| [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) | Pinned `node:24`-family image, zero install step |
+
+> [!NOTE]
+> There is no `LICENSE` file. Every plugin manifest declares `"license": "UNLICENSED"` pending a
+> Patterson legal ruling — see `CONTRIBUTING.md`. This is a recorded open question, not an
+> oversight.
 
 ## Provenance and gaps
 

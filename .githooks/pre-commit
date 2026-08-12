@@ -1,0 +1,44 @@
+#!/bin/sh
+# .githooks/pre-commit -- fast local gate for patterson-corp.
+#
+# Runs every skill/hook test suite under plugins/ and the design-tokens theme round-trip
+# before a commit is created. This is deliberately narrower than scripts/verify-all.sh (no
+# size/binary/forbidden-string checks, and it does not run scripts/tests/run-tests.sh) --
+# it exists to catch the two classes of drift that are cheapest to catch before the commit
+# even exists: a broken standards validator, and theme.css diverging from tokens.json.
+# scripts/verify-all.sh is the full gate; CI always runs that one too.
+#
+# Enable with:  git config core.hooksPath .githooks
+#
+# POSIX sh only. Fails loud and stops the commit on the first failing suite.
+set -eu
+
+ROOT=$(CDPATH= cd -- "$(git rev-parse --show-toplevel)" && pwd)
+cd "$ROOT"
+
+echo "pre-commit: running plugin test suites..."
+suite_count=0
+for suite in $(find plugins -name 'run-tests.sh' | sort); do
+  suite_count=$((suite_count + 1))
+  echo "  -> $suite"
+  if ! sh "$suite"; then
+    echo "pre-commit: FAILED $suite" >&2
+    echo "pre-commit: commit blocked. Fix the failing suite or use --no-verify deliberately." >&2
+    exit 1
+  fi
+done
+echo "pre-commit: $suite_count plugin suite(s) passed."
+
+THEME_VERIFY="plugins/patterson-brand/skills/design-tokens/scripts/verify-theme.sh"
+if [ -f "$THEME_VERIFY" ]; then
+  echo "pre-commit: verifying design-tokens theme round-trip..."
+  if ! sh "$THEME_VERIFY"; then
+    echo "pre-commit: FAILED $THEME_VERIFY" >&2
+    echo "pre-commit: theme.css does not match tokens.json. Regenerate it with" >&2
+    echo "  node plugins/patterson-brand/skills/design-tokens/scripts/build-theme.ts" >&2
+    echo "and commit the result. commit blocked." >&2
+    exit 1
+  fi
+fi
+
+echo "pre-commit: OK"

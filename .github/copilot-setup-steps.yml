@@ -1,0 +1,34 @@
+# .github/copilot-setup-steps.yml -- environment setup for the GitHub Copilot coding agent.
+#
+# [TBD: GitHub currently reads this configuration from .github/workflows/copilot-setup-steps.yml
+# to actually activate it for the Copilot coding agent's ephemeral environment. This file is
+# committed at the path this change's scope specifies; whether and when to duplicate or move it
+# under .github/workflows/ is a follow-up decision, not made here.]
+#
+# No package manifest, no dependency install: this repository ships zero third-party
+# dependencies. Every script runs directly via `node scripts/<name>.ts` using Node's native
+# TypeScript type stripping.
+name: "Copilot Setup Steps"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Confirm zero-dependency setup
+        run: |
+          echo "No package.json, no node_modules, no install step by design."
+          node --version

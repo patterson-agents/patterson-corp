@@ -1,0 +1,12 @@
+{
+  "name": "patterson-corp",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint"]
+    }
+  },
+  "postCreateCommand": "node --version && echo 'Zero-dependency repo: no install step. Run: sh scripts/verify-all.sh'",
+  "remoteUser": "node"
+}

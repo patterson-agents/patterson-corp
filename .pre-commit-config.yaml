@@ -1,0 +1,25 @@
+# .pre-commit-config.yaml -- for contributors who use the pre-commit framework instead of
+# (or in addition to) .githooks/pre-commit. Mirrors the same two checks: every plugin test
+# suite, and the design-tokens theme round-trip.
+#
+# Local hooks only -- no `repos:` entries pointing at an external GitHub repository. This
+# repository does not pull third-party pre-commit hook definitions over the network; every
+# check it runs is a script already committed here.
+repos:
+  - repo: local
+    hooks:
+      - id: patterson-plugin-suites
+        name: Patterson plugin test suites
+        description: Runs every run-tests.sh under plugins/.
+        entry: sh -c 'for s in $(find plugins -name run-tests.sh); do echo "-> $s"; sh "$s" || exit 1; done'
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: patterson-theme-round-trip
+        name: design-tokens theme round-trip
+        description: Confirms assets/theme.css matches the output of build-theme.ts.
+        entry: sh plugins/patterson-brand/skills/design-tokens/scripts/verify-theme.sh
+        language: system
+        pass_filenames: false
+        always_run: true
