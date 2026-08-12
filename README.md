@@ -22,6 +22,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 
 ## Table of contents
 
+- [Live site](#live-site)
 - [What this is](#what-this-is)
 - [Quick start](#quick-start)
 - [Plugin catalog](#plugin-catalog)
@@ -33,6 +34,13 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 - [Contributing and governance](#contributing-and-governance)
 - [Provenance and gaps](#provenance-and-gaps)
 - [Brand and licensing](#brand-and-licensing)
+
+## Live site
+
+**[corp.patterson.sh](https://corp.patterson.sh)** — the enterprise catalog of the Patterson
+agent platform: Patterson's institutional knowledge, encoded as installable agent plugins.
+
+<img src="docs/screenshots/site-home.webp" width="100%" alt="patterson-corp documentation site home page">
 
 ## What this is
 
