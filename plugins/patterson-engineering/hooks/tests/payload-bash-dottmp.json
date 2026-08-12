@@ -1,0 +1,6 @@
+{
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "cp report.md .tmp/report.md"
+  }
+}

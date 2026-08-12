@@ -82,5 +82,36 @@ house_allow payload-bash-python.json  "OFF SWITCH: python not blocked"
 house_allow payload-write-py.json     "OFF SWITCH: .py write not blocked"
 HOOKS_ENV=
 
+# ---------------------------------------------------------------------------
+# no-tmp-guard.ts: nothing is created or stored under a system temp directory;
+# project-local .tmp/, .claude/, .config/ instead. Same payload shape, same
+# off switch.
+# ---------------------------------------------------------------------------
+NOTMP="$DIR/../scripts/no-tmp-guard.ts"
+
+run_notmp() {
+  PATTERSON_ENGINEERING_HOOKS="${HOOKS_ENV:-}" \
+  node "$NOTMP" < "$DIR/$1" 2>/dev/null
+}
+
+notmp_deny() {
+  if run_notmp "$1" | grep -q '"permissionDecision": *"deny"'; then echo "ok   $2 -> deny"
+  else echo "FAIL $2 -> expected deny"; fail=1; fi
+}
+notmp_allow() {
+  if run_notmp "$1" | grep -q '"permissionDecision"'; then echo "FAIL $2 -> unexpected deny"; fail=1
+  else echo "ok   $2 -> allow"; fi
+}
+
+notmp_deny  payload-bash-tmp.json    "bash command referencing a system temp path"
+notmp_allow payload-bash-dottmp.json "bash command using project-local .tmp/"
+notmp_deny  payload-write-tmp.json   "writing a file under a system temp path"
+notmp_allow payload-write-dottmp.json "writing under a project-local .tmp/"
+
+# Off-switch: nothing may be denied by the no-tmp guard either.
+HOOKS_ENV=off
+notmp_allow payload-bash-tmp.json  "OFF SWITCH: system temp path not blocked"
+HOOKS_ENV=
+
 [ "$fail" -eq 0 ] && echo "ALL TESTS PASSED" || echo "TESTS FAILED"
 exit "$fail"

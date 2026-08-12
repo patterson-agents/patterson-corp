@@ -65,7 +65,8 @@ forbidden-string checks. Passing it does not mean CI will pass.
 | `${CLAUDE_PLUGIN_ROOT}` literal | The gate greps tracked files for `/home/...` or `/workspaces/...` followed by `/plugins`, `/skills`, or `/hooks`. Never paste a resolved path from this workspace into a tracked file. |
 | Skill name == directory name | `SKILL.md` frontmatter `name:` must equal its directory. Checked under `plugins/*/skills/` only — `.claude/skills/` is OpenSpec tooling, not product skills, and is intentionally excluded. |
 | No emoji | B2B healthcare brand. Use GFM alerts (`> [!NOTE]`) and tables. |
-| Conventional commits | `<type>(<scope>): <summary>` — `feat`, `fix`, `docs`, `test`, `chore`, `refactor`. |
+| Conventional commits | `<type>(<scope>): <summary>` — `feat`, `fix`, `docs`, `test`, `chore`, `refactor`. No Claude/AI attribution anywhere: no `Claude-Session:` trailers, no "Generated with" footers, no AI co-author lines, in commit messages or PR bodies. |
+| No `/tmp` | Nothing is created or stored under a system temp directory (`/tmp`, `/var/tmp`, `/dev/shm`). Working files live inside the project root: `.tmp/` scratch (gitignored), `.claude/` agent config, `.config/` tool config. Enforced by `hooks/scripts/no-tmp-guard.ts`. |
 
 **Size budget: the docs are stale.** `scripts/check-size.ts` enforces **2 MiB** of tracked
 bytes (raised in `c00b22f` when the OpenSpec root landed here). `CONTRIBUTING.md` and
