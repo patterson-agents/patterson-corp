@@ -1,0 +1,11 @@
+# Fixture: a repository with a workflow but no code-scanning analysis of any kind.
+name: build
+on: [push]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh ./scripts/build.sh

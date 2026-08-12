@@ -1,0 +1,8 @@
+# Fixture: Dependabot covering the github-actions ecosystem, which is the only
+# ecosystem present in a Patterson zero-dependency repository.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"

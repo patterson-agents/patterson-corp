@@ -1,0 +1,76 @@
+# Template: .github/workflows/codeql.yml
+#
+# Install to:  .github/workflows/codeql.yml   (repository root, not this skill's directory)
+#
+# CodeQL is GitHub Advanced Security's code-scanning engine. It satisfies the SAST row of the
+# control-coverage table alongside Checkmarx. It does NOT satisfy DAST: CodeQL reads source,
+# it never exercises a running application. See references/required-scans-mapping.md.
+#
+# EXTRACTOR CAVEAT -- read this before trusting a green check.
+#
+#   Patterson agent-configuration repositories carry .ts files with no package.json and no
+#   tsconfig.json, by design. The javascript-typescript extractor can complete successfully
+#   having analysed zero files, and the workflow still reports success. On the first run,
+#   open the "Analyze (javascript-typescript)" job log and read the extractor summary line
+#   reporting how many files analysed. If that count is 0, or is far below the number of
+#   .ts files in the repository, code scanning is green and covering nothing.
+#
+#   If the count is wrong, the usual causes are: a paths-ignore filter that is too broad, or
+#   sources living outside the checked-out working directory. Adjust `paths` below, re-run,
+#   and re-read the count. Do not close the finding on the strength of the check mark.
+#
+# Actions are pinned by major version, matching the convention in the repository's other
+# workflow templates.
+
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    # Weekly baseline so a dormant repository still reports against current queries.
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # javascript-typescript is one extractor covering both languages. Listing
+          # "javascript" and "typescript" separately is not valid.
+          - language: javascript-typescript
+            # build-mode: none is correct for a repository with no build step. It is also
+            # what makes the "files analysed" count worth checking: with no build to
+            # observe, the extractor relies entirely on file discovery.
+            build-mode: none
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          # queries: security-extended
+          #   Uncomment to widen the query pack beyond the default suite. Expect more
+          #   findings and a longer run.
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"

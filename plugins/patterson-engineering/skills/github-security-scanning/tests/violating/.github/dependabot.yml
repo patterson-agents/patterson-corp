@@ -1,0 +1,9 @@
+# Fixture: Dependabot declaring npm only. The github-actions ecosystem is absent, and npm is
+# declared in a repository that has no package manifest, which Dependabot reports as an error
+# on every run.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
