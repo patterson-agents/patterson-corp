@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/assets/banner.svg" width="100%" alt="Patterson Corp — Patterson Companies">
+<img src="docs/assets/banner.webp" width="100%" alt="Patterson Corp — Patterson Companies">
 
-<img src="docs/assets/patterson-logo-square-navy.svg" width="56" alt="Patterson Companies">
+<img src="docs/assets/patterson-logo-square-navy.webp" width="56" alt="Patterson Companies">
 
 # patterson-corp
 
