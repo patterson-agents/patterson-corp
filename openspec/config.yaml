@@ -1,0 +1,49 @@
+schema: spec-driven
+
+context: |
+  patterson-corp is the canonical Patterson Companies plugin marketplace for AI coding
+  agents (Claude Code, GitHub Copilot, VS Code). It also serves as the OpenSpec planning
+  root for the wider patterson-agents program (sibling repos: patterson-labs,
+  patterson-dental, patterson-vet, patterson-platform-docs, design-plugins, cli).
+  Conventions: scripts are zero-dependency TypeScript run as `node script.ts` (node:24,
+  erasable syntax only, node: builtins only, no package.json); validators exit 0/1/2 and
+  emit `LEVEL|file|line|rule|message`; conventional commits; every skill ships
+  _SOURCES.md + REFERENCES.md provenance; never invent a requirement - if a Patterson
+  source is silent, write `[TBD: not specified in <source>]`; no emoji on brand surfaces;
+  no binaries; `${CLAUDE_PLUGIN_ROOT}` stays literal. See docs/decisions/ for ADRs.
+
+rules:
+  proposal:
+    - Always include a "Non-goals" section
+    - Cite Patterson sources; unknowns are recorded as `[TBD: not specified in <source>]`
+
+# Project context (optional)
+# This is shown to AI when creating artifacts.
+# Add your tech stack, conventions, style guides, domain knowledge, etc.
+# Example:
+#   context: |
+#     Tech stack: TypeScript, React, Node.js
+#     We use conventional commits
+#     Domain: e-commerce platform
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always include a "Non-goals" section
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing
