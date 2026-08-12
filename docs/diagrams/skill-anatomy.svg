@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 330" width="880" height="330" role="img" aria-label="Anatomy of a capability: a lean SKILL.md pointing to references, scripts, assets, and provenance files">
+  <title>Anatomy of a capability</title>
+  <style>
+    .t   { font-family: "Proxima Nova", Arial, sans-serif; font-size: 14px; font-weight: 700; fill: #003767; }
+    .m   { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px; fill: #003767; }
+    .mw  { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px; fill: #ffffff; }
+    .d   { font-family: "Proxima Nova", Arial, sans-serif; font-size: 12px; fill: #58585B; }
+    .hd  { font-family: "Proxima Nova", Arial, sans-serif; font-size: 11.5px; font-weight: 700; fill: #58585B; letter-spacing: .06em; }
+    .ln  { stroke: #6DCFF6; stroke-width: 1.4; fill: none; }
+  </style>
+
+  <text class="hd" x="30" y="26">ALWAYS LOADED</text>
+  <text class="hd" x="360" y="26">LOADED ON DEMAND</text>
+
+  <!-- SKILL.md -->
+  <rect x="30" y="38" width="250" height="92" rx="6" fill="#003767"/>
+  <text class="mw" x="48" y="64">SKILL.md</text>
+  <text x="48" y="86" font-family="Proxima Nova, Arial, sans-serif" font-size="12" fill="#6DCFF6">name · description · triggers</text>
+  <text x="48" y="106" font-family="Proxima Nova, Arial, sans-serif" font-size="12" fill="#6DCFF6">the decision rules, and</text>
+  <text x="48" y="122" font-family="Proxima Nova, Arial, sans-serif" font-size="12" fill="#6DCFF6">pointers to everything else</text>
+
+  <text class="d" x="30" y="152">Kept lean deliberately: this is the</text>
+  <text class="d" x="30" y="168">cost paid on every invocation.</text>
+
+  <!-- connectors -->
+  <path class="ln" d="M 280 84 C 320 84, 320 62, 358 62"/>
+  <path class="ln" d="M 280 84 C 320 84, 320 122, 358 122"/>
+  <path class="ln" d="M 280 84 C 320 84, 320 182, 358 182"/>
+  <path class="ln" d="M 280 84 C 320 84, 320 242, 358 242"/>
+
+  <!-- right column -->
+  <rect x="358" y="40" width="492" height="44" rx="5" fill="#ECECEC"/>
+  <text class="m" x="376" y="60">references/</text>
+  <text class="d" x="376" y="76">the full source material, split by topic — read only when needed</text>
+
+  <rect x="358" y="100" width="492" height="44" rx="5" fill="#ECECEC"/>
+  <text class="m" x="376" y="120">scripts/</text>
+  <text class="d" x="376" y="136">executable checks — a claim the capability can prove rather than assert</text>
+
+  <rect x="358" y="160" width="492" height="44" rx="5" fill="#ECECEC"/>
+  <text class="m" x="376" y="180">assets/</text>
+  <text class="d" x="376" y="196">text artifacts the capability installs or hands to a project</text>
+
+  <rect x="358" y="220" width="492" height="44" rx="5" fill="#ffffff" stroke="#00817D" stroke-width="1.5"/>
+  <text class="m" x="376" y="240" fill="#00817D">_SOURCES.md · REFERENCES.md</text>
+  <text class="d" x="376" y="256">where every assertion came from, and what the source did not say</text>
+
+  <text class="d" x="358" y="296" fill="#00817D">Provenance is structural, not stylistic — a restated standard and an invented one read alike without it.</text>
+  <text class="d" x="358" y="314">No binaries. Originals are cited by URL, never vendored.</text>
+</svg>

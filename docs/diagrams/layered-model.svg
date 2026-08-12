@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 380" width="880" height="380" role="img" aria-label="Six-layer ownership model from enterprise to user, showing where each layer is expressed and that lower layers extend or override higher ones">
+  <title>Layered ownership model</title>
+  <style>
+    .lbl   { font-family: "Proxima Nova", Arial, sans-serif; font-size: 15px; font-weight: 600; fill: #ffffff; }
+    .lbld  { font-family: "Proxima Nova", Arial, sans-serif; font-size: 15px; font-weight: 600; fill: #003767; }
+    .where { font-family: "Proxima Nova", Arial, sans-serif; font-size: 12.5px; fill: #58585B; }
+    .cap   { font-family: "Proxima Nova", Arial, sans-serif; font-size: 12.5px; fill: #58585B; }
+    .hd    { font-family: "Proxima Nova", Arial, sans-serif; font-size: 12px; font-weight: 700; fill: #58585B; letter-spacing: .06em; }
+    .arrow { stroke: #00817D; stroke-width: 1.6; fill: none; }
+  </style>
+
+  <text class="hd" x="40" y="28">LAYER</text>
+  <text class="hd" x="470" y="28">EXPRESSED AS</text>
+
+  <!-- rows -->
+  <g>
+    <rect x="40" y="40" width="400" height="42" rx="5" fill="#003767"/>
+    <text class="lbl" x="60" y="67">enterprise</text>
+    <text class="where" x="470" y="66">policy that applies to all of Patterson</text>
+  </g>
+  <g>
+    <rect x="64" y="92" width="376" height="42" rx="5" fill="#147EC2"/>
+    <text class="lbl" x="84" y="119">sub-org</text>
+    <text class="where" x="470" y="118">catalog scoped to a business segment</text>
+  </g>
+  <g>
+    <rect x="88" y="144" width="352" height="42" rx="5" fill="#00A8E1"/>
+    <text class="lbl" x="108" y="171">department</text>
+    <text class="where" x="470" y="170">grouping owned by a function</text>
+  </g>
+  <g>
+    <rect x="112" y="196" width="328" height="42" rx="5" fill="#6DCFF6"/>
+    <text class="lbld" x="132" y="223">team</text>
+    <text class="where" x="470" y="222">grouping owned by a delivery group</text>
+  </g>
+  <g>
+    <rect x="136" y="248" width="304" height="42" rx="5" fill="#ECECEC"/>
+    <text class="lbld" x="156" y="275">repository</text>
+    <text class="where" x="470" y="274">settings committed beside the code</text>
+  </g>
+  <g>
+    <rect x="160" y="300" width="280" height="42" rx="5" fill="#ECECEC" stroke="#58585B" stroke-dasharray="3 3"/>
+    <text class="lbld" x="180" y="327">user</text>
+    <text class="where" x="470" y="326">individual preference</text>
+  </g>
+
+  <!-- extend/override arrow -->
+  <path class="arrow" d="M 28 48 L 28 334" marker-end="url(#a)"/>
+  <defs>
+    <marker id="a" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="#00817D"/>
+    </marker>
+  </defs>
+  <text class="cap" x="40" y="366" fill="#00817D">Lower layers extend what they inherit by default, and may override when they know better.</text>
+</svg>

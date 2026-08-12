@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340" role="img" aria-label="Marketplace topology: an enterprise catalog and an incubating catalog above two sub-org catalogs, each holding groupings of capabilities">
+  <title>Marketplace topology</title>
+  <style>
+    .n   { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; font-weight: 700; fill: #ffffff; }
+    .nd  { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13px; font-weight: 700; fill: #003767; }
+    .s   { font-family: "Proxima Nova", Arial, sans-serif; font-size: 11.5px; fill: #6DCFF6; }
+    .sd  { font-family: "Proxima Nova", Arial, sans-serif; font-size: 11.5px; fill: #58585B; }
+    .p   { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 11.5px; fill: #003767; }
+    .hd  { font-family: "Proxima Nova", Arial, sans-serif; font-size: 11.5px; font-weight: 700; fill: #58585B; letter-spacing: .06em; }
+    .ln  { stroke: #58585B; stroke-width: 1.2; fill: none; stroke-dasharray: 4 3; }
+    .lp  { stroke: #00817D; stroke-width: 1.6; fill: none; }
+  </style>
+
+  <text class="hd" x="30" y="24">ENTERPRISE CATALOG</text>
+  <text class="hd" x="600" y="24">INCUBATING</text>
+
+  <!-- enterprise -->
+  <rect x="30" y="36" width="520" height="150" rx="7" fill="#003767"/>
+  <text class="n" x="50" y="62">patterson-corp</text>
+  <text class="s" x="50" y="80">capability true for all of Patterson</text>
+
+  <rect x="50" y="94" width="235" height="72" rx="5" fill="#ffffff"/>
+  <text class="nd" x="66" y="116">engineering</text>
+  <text class="sd" x="66" y="134">delivery, infrastructure,</text>
+  <text class="sd" x="66" y="150">security and operations</text>
+
+  <rect x="299" y="94" width="235" height="72" rx="5" fill="#ffffff"/>
+  <text class="nd" x="315" y="116">brand</text>
+  <text class="sd" x="315" y="134">identity, design tokens,</text>
+  <text class="sd" x="315" y="150">editorial voice</text>
+
+  <!-- labs -->
+  <rect x="600" y="36" width="250" height="150" rx="7" fill="#ffffff" stroke="#00817D" stroke-width="1.8" stroke-dasharray="5 4"/>
+  <text class="nd" x="620" y="62" fill="#00817D">patterson-labs</text>
+  <text class="sd" x="620" y="80">work that has not yet earned</text>
+  <text class="sd" x="620" y="96">durable status</text>
+  <text class="sd" x="620" y="128">Graduates upward once an owner</text>
+  <text class="sd" x="620" y="144">and a review cadence exist.</text>
+
+  <!-- promotion arrow -->
+  <path class="lp" d="M 598 111 L 558 111" marker-end="url(#p)"/>
+  <defs>
+    <marker id="p" markerWidth="7" markerHeight="7" refX="3.5" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="#00817D"/>
+    </marker>
+  </defs>
+  <text class="sd" x="556" y="128" fill="#00817D" text-anchor="end">promotion</text>
+
+  <!-- sub-orgs -->
+  <text class="hd" x="30" y="228">SUB-ORG CATALOGS</text>
+  <rect x="30" y="240" width="255" height="66" rx="6" fill="#147EC2"/>
+  <text class="n" x="50" y="266">patterson-dental</text>
+  <text class="s" x="50" y="286">segment-particular capability</text>
+
+  <rect x="299" y="240" width="251" height="66" rx="6" fill="#147EC2"/>
+  <text class="n" x="319" y="266">patterson-vet</text>
+  <text class="s" x="319" y="286">segment-particular capability</text>
+
+  <path class="ln" d="M 158 188 L 158 238"/>
+  <path class="ln" d="M 424 188 L 424 238"/>
+
+  <text class="sd" x="600" y="266">Each catalog is separately owned and</text>
+  <text class="sd" x="600" y="282">separately subscribable. Segment</text>
+  <text class="sd" x="600" y="298">differences are real, not flattened.</text>
+
+  <text class="sd" x="30" y="330" fill="#00817D">Catalog names occupy one flat global namespace — a name registered twice replaces, it does not merge.</text>
+</svg>
