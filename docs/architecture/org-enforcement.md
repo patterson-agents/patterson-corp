@@ -8,9 +8,7 @@ Copilot) and where each enforcement tier actually binds. Authored under the
 
 | Rule | Source |
 | --- | --- |
-| No Python toolchain (interpreters, pip/pipx/uv/poetry/conda/virtualenv, `.py` files) | House toolchain policy; `verify-all.sh` step 6 |
-| bun is the only package manager (no npm/pnpm/yarn/npx; no foreign lockfiles) | House toolchain policy |
-| Supply-chain denylist: the four June 2026 AUR-attack npm packages and their publisher | Socket lockdown policy |
+| Supply-chain denylist: the four June 2026 AUR-attack npm packages and their publisher | Malware response |
 | No hardcoded secrets | CI/CD Pipeline Standards (existing `pretooluse-guard.ts`) |
 | Approved Dockerfile base images | Azure Compute Standards (existing guard, advisory by default) |
 
@@ -24,8 +22,7 @@ three together are the actual guarantee.
 `plugins/patterson-engineering/hooks/` ships two `PreToolUse` guards:
 
 - `pretooluse-guard.ts` (`Write|Edit`): secrets, Dockerfile base images.
-- `house-standards-guard.ts` (`Bash|Write|Edit`): Python toolchain, non-bun package
-  managers, foreign lockfiles, the supply-chain denylist.
+- `house-standards-guard.ts` (`Bash|Write|Edit`): the supply-chain denylist.
 
 Any repository or machine that enables `patterson-engineering@patterson-corp` gets both.
 `PATTERSON_ENGINEERING_HOOKS=off` disables blocking (would-block notes still print); both
@@ -45,8 +42,8 @@ tier enforces nothing. See `docs/architecture/layered-settings.md` for merge sem
 ### Tier 3 — CI and branch protection (binds even a hostile machine)
 
 The org `.github` repository (`patterson-agents/.github`) ships a reusable
-`standards-gate.yml` workflow (no Python files, no foreign lockfiles, no denylisted
-packages in manifests) that any repository calls with one `uses:` line. **Activation
+`standards-gate.yml` workflow (no denylisted packages in manifests) that any repository
+calls with one `uses:` line. **Activation
 (org owner):** create a GitHub organization ruleset requiring the standards-gate check on
 default branches, so a repository cannot merge around it. Until the ruleset exists, the gate
 runs only where a repository opts in.
@@ -63,18 +60,15 @@ Copilot has no hook mechanism; its enforcement is Tier 3 plus instructions:
   `.github` repository). The canonical text to paste lives in the org `.github` repository
   at `copilot-org-instructions.md`. **Activation (org owner):** paste it into that settings
   page and keep the two in sync when it changes.
-- **VS Code**: the workspace `.vscode/settings.json` enables instruction files and requires
-  manual approval for python/npm/pnpm/yarn terminal commands via
-  `chat.tools.terminal.autoApprove`. That is friction, not enforcement.
+- **VS Code**: the workspace `.vscode/settings.json` enables instruction files. It
+  auto-approves a few common terminal commands via `chat.tools.terminal.autoApprove` and
+  gates nothing on language or package manager.
 
 ## Activation checklist (the parts no repository file can do)
 
-0. **Inventory first.** Run the gate's three greps against every org repository before the
-   ruleset goes mandatory — tracked Python files (`git ls-files | grep -E '\.(py|pyw|pyi)$'`),
-   foreign lockfiles, and denylisted names in manifests. The org is mid Python-to-TypeScript
-   migration, so several repositories will hard-fail the gate; make the ruleset mandatory only
-   after the inventory is clean or each failure is triaged. Skipping this step turns rollout
-   into an org-wide CI outage.
+0. **Inventory first.** Run the gate's grep for denylisted names in manifests against every
+   org repository before the ruleset goes mandatory, and triage each hit. Skipping this step
+   turns rollout into an org-wide CI outage.
 1. Deploy merged managed settings to developer machines (Tier 2 goes live).
 2. Create the org ruleset requiring the standards-gate check (Tier 3 becomes mandatory).
 3. Paste `copilot-org-instructions.md` into organization Copilot settings.

@@ -2,8 +2,9 @@
 
 Fixtures for both PreToolUse guards. The `payload-secret*`/`payload-dockerfile*` family
 exercises `pretooluse-guard.ts` (secrets, base images); the `payload-bash-*` and
-`payload-write-*` family exercises `house-standards-guard.ts` (no Python, bun-only package
-management, the June 2026 supply-chain denylist). The denylist fixtures spell the denylisted
+`payload-write-*` family exercises `house-standards-guard.ts` (the June 2026 supply-chain
+denylist). The Python and package-manager fixtures are retained, but now assert that those
+are *allowed* — toolchain choice is no longer enforced. The denylist fixtures spell the denylisted
 package names plainly on purpose — the guard's content check exempts `tests/` paths, and the
 guard's own source deliberately never contains those names contiguously.
 

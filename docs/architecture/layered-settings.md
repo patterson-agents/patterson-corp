@@ -4,10 +4,10 @@ How Patterson projects an org chart onto agent configuration, given that the pla
 were not designed to carry one.
 
 > [!IMPORTANT]
-> **The enterprise layer now carries enforcement, but nothing here is installed.** As of the
-> `add-house-standards-enforcement` change (August 2026, approved by the platform owner),
-> `10-enterprise.json` sets `permissions.deny` rules mirroring the house-standards guard: the
-> Python toolchain, non-bun package managers, and foreign lockfile writes. Layers `20`–`40`
+> **The enterprise layer carries no toolchain enforcement, and nothing here is installed.**
+> `10-enterprise.json` no longer denies the Python toolchain, non-bun package managers, or
+> foreign lockfile writes — language and package-manager choice belongs to each repository,
+> not to an org-wide settings layer. Layers `20`–`40`
 > remain additive-only, and no layer sets `strictKnownMarketplaces` or `blockedMarketplaces` —
 > marketplace lockdown is still a separate, unapproved decision. None of it binds a developer
 > machine until the merged output is deployed to that machine's managed settings path (see

@@ -161,15 +161,10 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 6. No Python. This platform is zero-dependency TypeScript + POSIX sh only.
+# 6. (retired) Language choice is no longer gated. This repository happens to be
+#    zero-dependency TypeScript + POSIX sh, but that is a local preference, not a
+#    standard this repo enforces on itself or on the rest of the org.
 # ---------------------------------------------------------------------------
-py_files=$(git ls-files | grep -E '\.(py|pyw|pyi)$' || true)
-if [ -z "$py_files" ]; then
-  pass "no .py files tracked"
-else
-  echo "$py_files" | sed 's/^/  /'
-  fail "no .py files tracked"
-fi
 
 # ---------------------------------------------------------------------------
 # 7. No node:20 in yml/json/md -- scoped to the repository's shipped surface (plugins/,
