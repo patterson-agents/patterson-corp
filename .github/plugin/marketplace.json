@@ -16,7 +16,7 @@
       "source": "./plugins/patterson-engineering",
       "displayName": "Patterson Engineering Standards",
       "description": "Encodes Patterson's IT standards for CI/CD, Azure environments, compute, storage and data classification, and monitoring. Sourced from the ServiceNow IT Standards & Guidelines knowledge base. Relevant to engineers, SREs, platform, and architecture roles authoring or reviewing a CI/CD pipeline, provisioning Azure infrastructure, classifying data or choosing storage, configuring monitoring and alerting, or checking whether a tool is approved for use at Patterson.",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": {
         "name": "Patterson Infra CloudOps"
       },

@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/repo/docs/supply-chain-policy.md",
+    "content": "Never install atomic-lockfile, js-digest, lockfile-js, nextfile-js, or anything by herbsobering.\n"
+  }
+}

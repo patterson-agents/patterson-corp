@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/repo/package.json",
+    "content": "{\n  \"dependencies\": {\n    \"lockfile-js\": \"^1.0.0\"\n  }\n}\n"
+  }
+}

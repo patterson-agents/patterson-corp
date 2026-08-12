@@ -4,11 +4,14 @@ How Patterson projects an org chart onto agent configuration, given that the pla
 were not designed to carry one.
 
 > [!IMPORTANT]
-> **Nothing in `managed-settings.d/` is enforced, and nothing here is installed.** Every layer in
-> this repository sets additive keys only — `extraKnownMarketplaces` and `enabledPlugins`. No layer
-> sets `strictKnownMarketplaces`, no layer sets `permissions.deny`, and no layer forces a setting
-> that removes capability from a developer. The enforcement switches are written out below, one per
-> layer, commented out. Going live is a decision, not a discovery.
+> **The enterprise layer now carries enforcement, but nothing here is installed.** As of the
+> `add-house-standards-enforcement` change (August 2026, approved by the platform owner),
+> `10-enterprise.json` sets `permissions.deny` rules mirroring the house-standards guard: the
+> Python toolchain, non-bun package managers, and foreign lockfile writes. Layers `20`–`40`
+> remain additive-only, and no layer sets `strictKnownMarketplaces` or `blockedMarketplaces` —
+> marketplace lockdown is still a separate, unapproved decision. None of it binds a developer
+> machine until the merged output is deployed to that machine's managed settings path (see
+> [Deployment](#deployment) and `docs/architecture/org-enforcement.md`).
 
 ## Contents
 
