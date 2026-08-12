@@ -79,7 +79,7 @@ body:
       options:
         - label: I understand this proposal must not fill a source-silent gap with an invented answer -- gaps are recorded as `[TBD]`, not resolved by default.
           required: true
-        - label: I understand any validator script this skill ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, tested before it is implemented, following the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract.
+        - label: I understand any validator script this skill ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, tested before it is implemented, following the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract. Plugin scripts are zero-dependency; the `site/` toolchain is the documented exception (ADR 0005), and this skill's own scripts are not it.
           required: true
         - label: I understand this skill's tracked content must fit within the repository's 1 MiB tracked-byte budget and must not introduce tracked binaries (fonts, PDFs, Office documents, archives, or raster images over 50 KiB; SVG is exempt).
           required: true

@@ -7,10 +7,14 @@ of Patterson, shipped as installable plugins under `plugins/`. Full detail lives
 - **Every change goes through OpenSpec.** Look under `openspec/changes/` before writing
   code. If no change proposal covers what you are about to do, propose one first
   (`proposal.md`, `tasks.md`, and a delta spec) rather than editing `plugins/` directly.
-- **Zero-dependency TypeScript only.** Scripts run as `node script.ts` -- no build step, no
-  bundler, no `package.json`, no `node_modules`. Import only `node:*` built-ins. Use
-  erasable syntax exclusively: no `enum`, `namespace`, parameter properties, or legacy
-  decorators; Node's type stripper cannot erase them and the script throws at runtime.
+- **Plugin scripts are zero-dependency TypeScript; the `site/` toolchain is the documented
+  exception.** Scripts run as `node script.ts` -- no build step, no bundler, no
+  `package.json`, no `node_modules`. Import only `node:*` built-ins. Use erasable syntax
+  exclusively: no `enum`, `namespace`, parameter properties, or legacy decorators; Node's
+  type stripper cannot erase them and the script throws at runtime. A `site/` directory may
+  carry a pinned, socket-gated `package.json` and `bun.lock` for the branded doc-site
+  toolchain -- see `docs/decisions/0005-branded-doc-sites.md`. The exception is scoped to
+  `site/` only; every other script stays zero-dependency.
 - **Target Node 24, never Node 20.** Every pinned runtime in this repository -- CI, the
   devcontainer, `copilot-setup-steps.yml` -- is `node:24`-family.
 - **A validator is a contract.** Path argument in; exit `0` (pass), `1` (findings), or `2`

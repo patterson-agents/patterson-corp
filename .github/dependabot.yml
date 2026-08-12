@@ -1,12 +1,18 @@
-# github-actions is the ONLY ecosystem declared here, deliberately.
+# Two ecosystems declared here, deliberately, and no more.
 #
-# This is a zero-dependency, agent-configuration repository: no package manifest, no
-# lockfile, no vendored modules. Declaring a package ecosystem with no manifest to read
-# produces a Dependabot error on every scheduled run, which trains reviewers to ignore the
-# Dependabot tab. Add an ecosystem only when the corresponding manifest actually lands here.
+# Plugin scripts remain zero-dependency: no manifest, no lockfile, no vendored modules under
+# plugins/, so no package-ecosystem entry is declared for them. Declaring one with no manifest
+# to read produces a Dependabot error on every scheduled run, which trains reviewers to ignore
+# the Dependabot tab. Add a new ecosystem only when the corresponding manifest actually lands.
 #
-# What this covers: the pinned action versions used by this repository's workflows — the
-# repository's real third-party dependency surface.
+# The exception is `/site`: docs/decisions/0005-branded-doc-sites.md authorizes a scoped
+# `site/package.json` + `site/bun.lock` for the branded doc-site toolchain (pinned
+# astro@7.1.5 / @astrojs/starlight@0.41.5, socket-gated). The npm entry below is declared
+# ahead of that manifest landing so dependency coverage exists from the day `site/` is
+# scaffolded, per the program's task list -- until then it has nothing to scan.
+#
+# What this covers: the pinned action versions used by this repository's workflows, plus the
+# `site/` toolchain once it lands -- the repository's real third-party dependency surface.
 
 version: 2
 updates:
@@ -24,3 +30,18 @@ updates:
     labels:
       - "dependencies"
       - "github-actions"
+
+  - package-ecosystem: "npm"
+    directory: "/site"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    groups:
+      site:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "chore"
+    labels:
+      - "dependencies"
+      - "site"

@@ -5,9 +5,11 @@
 # committed at the path this change's scope specifies; whether and when to duplicate or move it
 # under .github/workflows/ is a follow-up decision, not made here.]
 #
-# No package manifest, no dependency install: this repository ships zero third-party
-# dependencies. Every script runs directly via `node scripts/<name>.ts` using Node's native
-# TypeScript type stripping.
+# Plugin scripts are zero-dependency: no dependency install, every script runs directly via
+# `node scripts/<name>.ts` using Node's native TypeScript type stripping. The `site/`
+# toolchain is the documented exception -- a pinned, socket-gated `package.json` and
+# `bun.lock` for the branded doc-site build, scoped to `site/` only. See
+# docs/decisions/0005-branded-doc-sites.md.
 name: "Copilot Setup Steps"
 
 on:
@@ -30,5 +32,6 @@ jobs:
 
       - name: Confirm zero-dependency setup
         run: |
-          echo "No package.json, no node_modules, no install step by design."
+          echo "Plugin scripts: no package.json, no node_modules, no install step by design."
+          echo "site/ is the documented exception (ADR 0005) -- scoped to site/ only."
           node --version

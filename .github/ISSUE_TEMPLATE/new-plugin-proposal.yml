@@ -59,7 +59,7 @@ body:
       options:
         - label: I understand this proposal must not fill a source-silent gap with an invented answer -- gaps are recorded as `[TBD]`, not resolved by default.
           required: true
-        - label: I understand every script this plugin ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, and every validator follows the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract.
+        - label: I understand every script this plugin ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, and every validator follows the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract. Plugin scripts are zero-dependency; the `site/` toolchain is the documented exception (ADR 0005), and this plugin's own scripts are not it.
           required: true
         - label: I understand this plugin's tracked content must fit within the repository's 1 MiB tracked-byte budget and must not introduce tracked binaries (fonts, PDFs, Office documents, archives, or raster images over 50 KiB; SVG is exempt).
           required: true
