@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "patterson-corp",
+  "description": "Patterson Companies enterprise agent plugins. The top layer of the Patterson agent platform: standards, brand, and shared capability that applies across every sub-organization.",
+  "version": "0.1.0",
+  "owner": {
+    "name": "Patterson Companies",
+    "url": "https://github.com/patterson-agents"
+  },
+  "metadata": {
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "patterson-engineering",
+      "source": "./plugins/patterson-engineering",
+      "displayName": "Patterson Engineering Standards",
+      "description": "Encodes Patterson's IT standards for CI/CD, Azure environments, compute, storage and data classification, and monitoring. Sourced from the ServiceNow IT Standards & Guidelines knowledge base.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Patterson Infra CloudOps"
+      },
+      "license": "UNLICENSED",
+      "category": "engineering",
+      "keywords": [
+        "standards",
+        "compliance",
+        "ci-cd",
+        "azure",
+        "security",
+        "governance"
+      ],
+      "relevance": {
+        "roles": ["engineer", "sre", "platform", "architect"],
+        "contexts": [
+          "authoring or reviewing a CI/CD pipeline",
+          "provisioning Azure infrastructure",
+          "classifying data or choosing storage",
+          "configuring monitoring and alerting",
+          "checking whether a tool is approved for use at Patterson"
+        ]
+      }
+    },
+    {
+      "name": "patterson-brand",
+      "source": "./plugins/patterson-brand",
+      "displayName": "Patterson Brand & Design System",
+      "description": "Patterson Companies brand identity, design tokens, and editorial voice. Ships a drop-in Tailwind v4 + shadcn/ui theme derived from the 2025 Brand Guide.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Patterson Corporate Marketing & Communications"
+      },
+      "license": "UNLICENSED",
+      "category": "design",
+      "keywords": [
+        "brand",
+        "design-system",
+        "design-tokens",
+        "tailwind",
+        "shadcn",
+        "copywriting",
+        "voice-and-tone"
+      ],
+      "relevance": {
+        "roles": ["designer", "engineer", "marketer", "writer"],
+        "contexts": [
+          "building any Patterson-branded UI",
+          "starting a new frontend project that needs Patterson styling",
+          "writing customer-facing or internal copy",
+          "reviewing work for brand compliance",
+          "building a presentation or document from a Patterson template"
+        ]
+      }
+    }
+  ]
+}
