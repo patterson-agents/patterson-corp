@@ -1,0 +1,8 @@
+{
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "/repo/Dockerfile",
+    "content": "FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build\nRUN dotnet publish\nFROM mcr.microsoft.com/dotnet/aspnet:8.0\nCOPY --from=build /out /app\n"
+  }
+}

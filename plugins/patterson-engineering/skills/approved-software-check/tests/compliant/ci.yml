@@ -1,0 +1,9 @@
+# Fixture: CI using only approved tooling.
+steps:
+  - uses: actions/checkout@v4
+  - name: Secret scan
+    run: gitleaks detect --source .
+  - name: Container scan
+    run: trivy image app:latest
+  - name: Plan
+    run: terraform plan

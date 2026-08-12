@@ -1,0 +1,20 @@
+# Approved container base image sources for patterson-engineering.
+#
+# [TBD: the Azure Compute Standards require "approved base images" and state that
+#  "unmodified Microsoft marketplace images qualify", but they do NOT enumerate an
+#  approved *container* registry or image list. The entries below are therefore the
+#  narrowest reading of the standard plus placeholders your platform team must confirm.]
+#
+# Format: one prefix per line. A FROM image matches if it starts with the prefix.
+# Lines beginning with # are comments. Edit this file to add your internal registry.
+#
+# Derived directly from the standard (unmodified Microsoft images qualify):
+mcr.microsoft.com/
+#
+# Always allowed: an empty base layer.
+scratch
+#
+# [TBD: confirm the canonical Patterson internal registry hostname(s) with Infra CloudOps
+#  and AppSec, then uncomment / correct the lines below.]
+# pattersoncompanies.azurecr.io/
+# patterson.azurecr.io/

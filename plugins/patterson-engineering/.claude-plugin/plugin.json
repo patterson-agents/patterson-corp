@@ -1,0 +1,20 @@
+{
+  "name": "patterson-engineering",
+  "version": "0.1.0",
+  "description": "Patterson Companies engineering standards for CI/CD, Azure environments, compute, storage and data classification, monitoring, and approved tooling.",
+  "author": {
+    "name": "Patterson Infra CloudOps"
+  },
+  "homepage": "https://github.com/patterson-agents/patterson-corp/tree/main/plugins/patterson-engineering",
+  "repository": "https://github.com/patterson-agents/patterson-corp",
+  "license": "UNLICENSED",
+  "keywords": [
+    "standards",
+    "compliance",
+    "ci-cd",
+    "azure",
+    "security",
+    "governance",
+    "patterson"
+  ]
+}

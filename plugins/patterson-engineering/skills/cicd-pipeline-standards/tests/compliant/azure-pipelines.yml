@@ -1,0 +1,45 @@
+# Fixture: a pipeline that satisfies the CI/CD Pipeline Standards.
+trigger: [main]
+variables:
+  minimumApproverCount: 2
+stages:
+  - stage: Build
+    jobs:
+      - job: build_once
+        steps:
+          - script: dotnet build -c Release
+            displayName: Build (one build, one artifact)
+          - script: dotnet test
+            displayName: Unit tests
+          - task: Gitleaks@2
+            displayName: Secret scanning
+          - task: Checkmarx@1
+            displayName: SAST and SCA
+          - script: trivy image $(imageName)
+            displayName: Container scanning
+          - script: cx scan create --scan-types kics
+            displayName: IaC scanning
+          - script: cx scan create --scan-types api-security
+            displayName: API scanning
+          - script: zap-baseline.py -t $(stagingUrl)
+            displayName: DAST
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: app
+  - stage: DeployProd
+    jobs:
+      - deployment: prod
+        environment: production
+        strategy:
+          canary:
+            increments: [10, 50]
+        workspace: {}
+        variables:
+          azureSubscription: sc-prod
+          authenticationScheme: WorkloadIdentityFederation
+        steps:
+          - download: current
+            artifact: app
+          - script: ./scripts/smoke-test.sh
+            displayName: Smoke test
+          - script: ./scripts/rollback.sh
+            displayName: Automated rollback on failure

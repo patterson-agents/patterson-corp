@@ -1,0 +1,6 @@
+# Fixture: approved tooling that requires approval before use.
+observability:
+  apm: dynatrace
+  paging: pagerduty
+security:
+  sast: checkmarx

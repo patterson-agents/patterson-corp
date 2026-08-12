@@ -1,0 +1,8 @@
+# Fixture: CI using tooling that is not on the approved list.
+steps:
+  - name: Dependency scan
+    run: snyk test
+  - name: Quality gate
+    run: sonarqube-scanner
+  - name: Container scan
+    run: grype app:latest
