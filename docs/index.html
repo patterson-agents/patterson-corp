@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>patterson-corp</title>
+<style>
+  :root {
+    --navy: #001B34;
+    --navy-2: #003767;
+    --blue: #00A8E1;
+    --blue-2: #147EC2;
+    --teal: #00817D;
+    --gray: #58585B;
+    --fg: #E8EEF4;
+    --fg-dim: #A9BBCB;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--navy);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  main {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  header img { height: 40px; width: 40px; }
+  h1 {
+    font-size: 1.75rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  p.tagline {
+    color: var(--fg-dim);
+    margin: 0 0 2.5rem;
+    font-size: 1.05rem;
+  }
+  h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--blue);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 0.4rem;
+    margin: 2.5rem 0 1rem;
+  }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { margin: 0 0 0.6rem; }
+  a {
+    color: var(--fg);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  a:hover { color: var(--blue); text-decoration: underline; }
+  .label { color: var(--fg-dim); font-size: 0.85rem; }
+  .card {
+    background: var(--navy-2);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+  footer {
+    margin-top: 3rem;
+    color: var(--fg-dim);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    padding-top: 1rem;
+  }
+  footer a { color: var(--fg-dim); display: inline; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="assets/patterson-logo-square-navy.svg" alt="" style="filter: invert(1) brightness(2);">
+    <h1>patterson-corp</h1>
+  </header>
+  <p class="tagline">Trusted Expertise. Unrivaled Support. — Patterson's institutional knowledge, encoded as installable agent plugins.</p>
+
+  <div class="card">
+    <h2 style="margin-top:0; border-bottom:none;">Start here</h2>
+    <ul>
+      <li><a href="https://github.com/patterson-agents/patterson-corp">README <span class="label">on GitHub</span></a></li>
+    </ul>
+  </div>
+
+  <h2>Architecture</h2>
+  <ul>
+    <li><a href="architecture/layered-settings.md">Layered managed settings <span class="label">how the org-chart layering model works</span></a></li>
+  </ul>
+
+  <h2>Diagrams</h2>
+  <ul>
+    <li><a href="diagrams/layered-model.svg">Layered model</a></li>
+    <li><a href="diagrams/marketplace-topology.svg">Marketplace topology</a></li>
+    <li><a href="diagrams/skill-anatomy.svg">Skill anatomy</a></li>
+  </ul>
+
+  <h2>Architecture decision records</h2>
+  <ul>
+    <li><a href="decisions/0001-spec-framework.md">0001 — OpenSpec as the spec-driven framework</a></li>
+    <li><a href="decisions/0002-cross-vendor-manifest-projection.md">0002 — Cross-vendor manifest projection is a copy, not a transformation</a></li>
+    <li><a href="decisions/0003-plugin-name-reconciliation.md">0003 — Plugin name reconciliation</a></li>
+  </ul>
+
+  <footer>
+    Served from <code>docs/</code> via GitHub Pages (deploy-from-Actions). Markdown links render as
+    raw text, not rendered HTML — <a href="https://github.com/patterson-agents/patterson-corp">view on GitHub</a>
+    for rendered Markdown.
+  </footer>
+</main>
+</body>
+</html>
