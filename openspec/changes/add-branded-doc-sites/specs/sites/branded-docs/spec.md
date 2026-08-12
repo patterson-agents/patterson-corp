@@ -11,15 +11,18 @@ fonts only; the documented accent-color policy; and green pre-existing tests thr
 
 Each repository's `site/` directory SHALL build with `astro build` exiting `0`, using only the
 pinned, socket-gated dependencies recorded in ADR 0005 (`astro@7.1.5`, `@astrojs/starlight@0.41.5`)
-and a committed `site/bun.lock`. The build SHALL NOT depend on `sharp`; Astro's image service SHALL
+and a committed `site/bun.lock`. The build SHALL NOT load `sharp`; Astro's image service SHALL
 be configured as `passthroughImageService`, with site images pre-optimized to SVG or WebP ahead of
-build.
+build. (`sharp` unavoidably appears in `site/bun.lock` as an optional dependency declared by
+`astro` — omitting optional dependencies also removes Rolldown's native binding and breaks the
+build — but it is never imported at build or run time under the passthrough service. ADR 0005
+records this; the requirement binds what executes, not what the resolver records.)
 
 #### Scenario: Running the site build
 
 - **WHEN** `bun run build` is executed inside a repository's `site/` directory
 - **THEN** the command exits `0` and produces `site/dist`
-- **AND** no `sharp` package appears in `site/bun.lock`
+- **AND** the build log shows the passthrough image service in effect, with no `sharp` module loaded
 
 #### Scenario: A new dependency is proposed for `site/`
 
