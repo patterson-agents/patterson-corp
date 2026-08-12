@@ -12,7 +12,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 
 ![plugins](https://img.shields.io/badge/plugins-2-00A8E1?labelColor=003767)
 ![skills](https://img.shields.io/badge/skills-12-003767)
-![size](https://img.shields.io/badge/tracked-1008_KB-147EC2)
+![size](https://img.shields.io/badge/tracked-1069_KB-147EC2)
 ![runtime](https://img.shields.io/badge/scripts-TypeScript_·_no_build_step-00817D)
 ![deps](https://img.shields.io/badge/dependencies-none-58585B)
 ![gate](https://img.shields.io/badge/gate-verify--all.sh-58585B)
