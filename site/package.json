@@ -1,0 +1,17 @@
+{
+  "name": "patterson-corp-site",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "corp.patterson.sh -- the Patterson enterprise agent catalog, as a Starlight documentation site.",
+  "scripts": {
+    "content": "node ../scripts/build-site-content.ts",
+    "dev": "bun run content && astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "0.41.5",
+    "astro": "7.1.5"
+  }
+}

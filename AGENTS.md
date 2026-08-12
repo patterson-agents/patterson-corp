@@ -1,8 +1,14 @@
 # AGENTS.md
 
-`patterson-corp` is a Claude Code / Copilot **plugin marketplace**, not an application. There
-is no `package.json`, no `node_modules`, no build step. Everything shipped lives under
-`plugins/`; everything else is governance, validators, or planning prose.
+`patterson-corp` is a Claude Code / Copilot **plugin marketplace**, not an application.
+Everything shipped lives under `plugins/`; everything else is governance, validators, planning
+prose, or the documentation site.
+
+Plugin scripts are zero-dependency: no `package.json`, no `node_modules`, no build step,
+anywhere under `plugins/`. The **one documented exception is `site/`**, which carries a pinned
+`astro` / `@astrojs/starlight` toolchain and a committed `bun.lock` for the branded
+documentation site — see `docs/decisions/0005-branded-doc-sites.md`. That exception is scoped
+to `site/` and relaxes nothing anywhere else.
 
 Read `CONTRIBUTING.md` for the full rules. This file records what an agent gets wrong without
 help.

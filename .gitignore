@@ -5,3 +5,15 @@ node_modules/
 dist/
 .astro/
 site/dist/
+
+# Generated documentation-site content. `scripts/build-site-content.ts` derives every page
+# below from the canonical Markdown elsewhere in this repository (plugins/, docs/, openspec/,
+# and the root governance files). The sources are tracked; these copies are not, so tracked
+# bytes stay flat as the catalog grows. CI regenerates them before `bun run build`; run
+# `node scripts/build-site-content.ts` locally before `bun run dev`.
+site/src/content/docs/architecture/
+site/src/content/docs/plugins/
+site/src/content/docs/decisions/
+site/src/content/docs/specifications/
+site/src/content/docs/governance/
+site/src/content/docs/provenance.md
