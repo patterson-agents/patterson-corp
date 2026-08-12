@@ -11,8 +11,8 @@
 encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-marketplaces).
 
 ![plugins](https://img.shields.io/badge/plugins-2-00A8E1?labelColor=003767)
-![skills](https://img.shields.io/badge/skills-11-003767)
-![size](https://img.shields.io/badge/tracked-882_KB-147EC2)
+![skills](https://img.shields.io/badge/skills-12-003767)
+![size](https://img.shields.io/badge/tracked-1008_KB-147EC2)
 ![runtime](https://img.shields.io/badge/scripts-TypeScript_·_no_build_step-00817D)
 ![deps](https://img.shields.io/badge/dependencies-none-58585B)
 ![gate](https://img.shields.io/badge/gate-verify--all.sh-58585B)
@@ -82,7 +82,7 @@ Then use it three ways:
 
 | Plugin | What it is | Skills |
 |---|---|---|
-| **[`patterson-engineering`](plugins/patterson-engineering/)**<br>Standards | Patterson's IT standards for delivery, infrastructure, data and operations — with executable validators and a compliance-reviewer subagent. | `cicd-pipeline-standards` · `azure-environment-standards` · `azure-compute-standards` · `storage-data-standards` · `monitoring-alerting-standards` · `approved-software-check` |
+| **[`patterson-engineering`](plugins/patterson-engineering/)**<br>Standards | Patterson's IT standards for delivery, infrastructure, data and operations — with executable validators and a compliance-reviewer subagent. | `cicd-pipeline-standards` · `azure-environment-standards` · `azure-compute-standards` · `storage-data-standards` · `monitoring-alerting-standards` · `approved-software-check` · `github-security-scanning` |
 | **[`patterson-brand`](plugins/patterson-brand/)**<br>Identity | Brand identity, a drop-in Tailwind v4 + shadcn/ui theme generated from tokens, and the editorial voice for each sub-brand. | `brand-identity` · `design-tokens` · `copy-style-guide` · `voice-and-tone` · `presentation-templates` |
 
 Each plugin has its own README with the full skill list, validator behaviour, and open questions.

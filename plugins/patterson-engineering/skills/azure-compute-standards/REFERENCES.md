@@ -20,8 +20,9 @@ Canonical locations for everything this skill asserts.
 | Azure Environment Standards | `a507920d2b25c7941f16fc8bee91bfc4` |
 | Azure Compute Standards | `937eb90b3b650f107f43b50236e45a16` |
 | Monitoring & Alerting | `972394c02b80835ce9affd3fc891bf04` |
+| GitHub Security Scanning | `[TBD: no article exists]` |
 
-All of the above resolve at
+All rows with a `sys_kb_id` resolve at
 `https://patterson.service-now.com/esc?id=kb_article_view&sys_kb_id=<sys_kb_id>`.
 
 ## Local reference files

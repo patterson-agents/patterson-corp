@@ -1,6 +1,6 @@
 {
   "name": "patterson-engineering",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Patterson Companies engineering standards for CI/CD, Azure environments, compute, storage and data classification, monitoring, and approved tooling.",
   "author": {
     "name": "Patterson Infra CloudOps"

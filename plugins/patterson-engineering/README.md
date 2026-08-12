@@ -10,8 +10,8 @@
 **Trusted Expertise. Unrivaled Support.** — the six Patterson IT Standards & Guidelines, put in front
 of an agent while it writes code and applied to the code afterwards.
 
-![skills](https://img.shields.io/badge/skills-6-00A8E1?labelColor=003767)
-![validators](https://img.shields.io/badge/validators-4-003767)
+![skills](https://img.shields.io/badge/skills-7-00A8E1?labelColor=003767)
+![validators](https://img.shields.io/badge/validators-5-003767)
 ![size](https://img.shields.io/badge/size-581_KB-147EC2)
 ![runtime](https://img.shields.io/badge/scripts-TypeScript_·_no_build_step-00817D)
 ![deps](https://img.shields.io/badge/dependencies-none-58585B)
@@ -63,8 +63,8 @@ KB owner: Infra CloudOps.
 
 | Component | Count | What it is |
 |---|---|---|
-| Skills | **6** | A lean `SKILL.md` with the decision rules an agent needs immediately, a `references/` directory with the full clause text, and `_SOURCES.md` / `REFERENCES.md` recording provenance. |
-| Validator scripts | **4** | TypeScript run directly by `node` (>= 22.18, Patterson standardises on node:24) via native type stripping. Node builtins only — no build step, no `package.json`, no dependencies. |
+| Skills | **7** | A lean `SKILL.md` with the decision rules an agent needs immediately, a `references/` directory with the full clause text, and `_SOURCES.md` / `REFERENCES.md` recording provenance. |
+| Validator scripts | **5** | TypeScript run directly by `node` (>= 22.18, Patterson standardises on node:24) via native type stripping. Node builtins only — no build step, no `package.json`, no dependencies. |
 | Agent | **1** | [`standards-compliance-reviewer`](agents/standards-compliance-reviewer.md) audits a repo or a diff against all six standards and produces a severity-ranked report with a citation on every finding. |
 | Hook | **1** | A PreToolUse hook that blocks two unambiguous violations at write time. |
 
@@ -78,6 +78,7 @@ KB owner: Infra CloudOps.
 | [`azure-compute-standards`](skills/azure-compute-standards/) | VMs, VMSS, AVD, Windows 365, AKS, Container Apps, ACI, ACR, App Service Plans, images and patching. | [`check-compute.ts`](skills/azure-compute-standards/scripts/check-compute.ts) |
 | [`storage-data-standards`](skills/storage-data-standards/) | Data classification, encryption, identity, backup, redundancy, disaster recovery, the storage exception path. | [`check-storage.ts`](skills/storage-data-standards/scripts/check-storage.ts) |
 | [`monitoring-alerting-standards`](skills/monitoring-alerting-standards/) | The eight monitoring layers, PagerDuty routing, MTTD/MTTA/MTTR, DORA metrics, tooling, in-scope systems. | None — [by design](skills/monitoring-alerting-standards/scripts/README.md) |
+| [`github-security-scanning`](skills/github-security-scanning/) | CodeQL code scanning, Dependabot, secret scanning with push protection, and a security policy — installed and audited against the seven required CI scans. No ServiceNow article covers it; see the skill's own `REFERENCES.md`. | [`check-security-config.ts`](skills/github-security-scanning/scripts/check-security-config.ts) |
 
 `azure-environment-standards` and `monitoring-alerting-standards` deliberately have no validator.
 Their requirements — subscription isolation, change control, PagerDuty escalation policies — are not
@@ -133,6 +134,7 @@ node skills/cicd-pipeline-standards/scripts/check-pipeline.ts  .github/workflows
 node skills/azure-compute-standards/scripts/check-compute.ts   infra/
 node skills/storage-data-standards/scripts/check-storage.ts    infra/
 node skills/approved-software-check/scripts/check-tooling.ts   trivy
+node skills/github-security-scanning/scripts/check-security-config.ts .
 ```
 
 Each validator ships fixtures and a POSIX-sh test harness:
@@ -142,6 +144,7 @@ sh skills/cicd-pipeline-standards/tests/run-tests.sh
 sh skills/azure-compute-standards/tests/run-tests.sh
 sh skills/storage-data-standards/tests/run-tests.sh
 sh skills/approved-software-check/tests/run-tests.sh
+sh skills/github-security-scanning/tests/run-tests.sh
 sh hooks/tests/run-tests.sh
 ```
 
@@ -232,7 +235,7 @@ patterson-engineering/
 │   ├── approved-base-images.txt    # editable allowlist
 │   ├── scripts/pretooluse-guard.ts
 │   └── tests/
-└── skills/<six skills>/
+└── skills/<seven skills>/
     ├── SKILL.md                    # lean: decision rules + pointers
     ├── references/                 # full clause text
     ├── scripts/                    # validator, or a README saying why there is none
