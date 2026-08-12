@@ -205,11 +205,6 @@ for t in $(find . -name run-tests.sh); do sh "$t"; done
 | [`.githooks/pre-commit`](.githooks/pre-commit) · [`.pre-commit-config.yaml`](.pre-commit-config.yaml) | The fast local gate (opt in with `git config core.hooksPath .githooks`) |
 | [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json) | Pinned `node:24`-family image, zero install step |
 
-> [!NOTE]
-> There is no `LICENSE` file. Every plugin manifest declares `"license": "UNLICENSED"` pending a
-> Patterson legal ruling — see `CONTRIBUTING.md`. This is a recorded open question, not an
-> oversight.
-
 ## Provenance and gaps
 
 Every assertion traces to a source. Each skill carries `_SOURCES.md` (where it came from, with

@@ -149,15 +149,3 @@ tag.
 - **THEN** the image tag is from the `node:24` family and is pinned rather than floating
 - **AND** no `node:20` reference appears anywhere in the definition
 
-### Requirement: LICENSE remains absent pending legal ruling
-
-The repository SHALL NOT add a `LICENSE` file as part of this change. The absence SHALL be recorded
-as a blocked open question rather than resolved by default.
-
-#### Scenario: Reviewer asks why there is no licence
-
-- **WHEN** a reviewer checks for a `LICENSE` file
-- **THEN** `CONTRIBUTING.md` or `SECURITY.md` records that manifests declare `UNLICENSED` and that a
-  legal ruling is pending
-- **AND** no licence text is chosen on the repository's behalf
-

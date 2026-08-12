@@ -41,9 +41,6 @@ of Patterson, shipped as installable plugins under `plugins/`. Full detail lives
 - **No emoji.** This is a B2B healthcare distribution brand; use GFM alerts and tables for
   emphasis instead.
 - **Conventional commits.** `<type>(<scope>): <summary>`.
-- **There is no `LICENSE` file, and that is intentional.** Manifests declare
-  `"license": "UNLICENSED"` pending a Patterson legal ruling. Do not add one and do not
-  change that field.
 
 Run the full gate before treating any change as done:
 

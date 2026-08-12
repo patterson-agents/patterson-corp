@@ -88,15 +88,6 @@ nothing in this change activates it on your behalf.)
   no-binaries, and size-budget items. An unchecked box that should be checked is more
   useful to a reviewer than a checked box that is not true.
 
-## Licensing
-
-There is no `LICENSE` file in this repository, and this is deliberate, not an oversight.
-Every plugin manifest currently declares `"license": "UNLICENSED"`. Choosing an open-source
-or proprietary license for a healthcare distributor's published agent-platform artifacts is
-a legal decision, not an engineering one, and it has not been made yet. Do not add a
-`LICENSE` file, and do not change the manifests' `license` field, without an explicit
-ruling from Patterson legal recorded in an OpenSpec change.
-
 ## Security
 
 See `SECURITY.md` for how to report a vulnerability. Do not open a public issue for one.

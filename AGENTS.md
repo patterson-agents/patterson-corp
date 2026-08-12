@@ -112,10 +112,13 @@ Two skills have **no validator on purpose**: `azure-environment-standards` and
   never hand-edit or reformat `theme.css`.
 - Plugin and marketplace names share one flat global namespace across all Patterson catalogs —
   see `docs/decisions/0003-plugin-name-reconciliation.md` before renaming or adding a plugin.
-- `plugins/patterson-engineering/hooks/` ships a `PreToolUse` guard whose blocking is disabled
-  by `PATTERSON_ENGINEERING_HOOKS=off`; its test fixtures contain deliberately synthetic
-  secrets, excluded via `.github/secret_scanning.yml`.
-- `managed-settings.d/` demonstrates the layered enterprise → team model. Nothing there is
-  enforced; the switches are intentionally off.
-- **Do not add a `LICENSE` file** and do not change `"license": "UNLICENSED"` in any manifest.
-  That is a pending Patterson legal decision, recorded in `CONTRIBUTING.md`.
+- `plugins/patterson-engineering/hooks/` ships two `PreToolUse` guards (`pretooluse-guard.ts`
+  for secrets and base images; `house-standards-guard.ts` for no-Python, bun-only, and the
+  supply-chain denylist), both disabled by `PATTERSON_ENGINEERING_HOOKS=off`; the test
+  fixtures contain deliberately synthetic secrets, excluded via `.github/secret_scanning.yml`.
+  The denylist is spelled in split halves in the guard's source — never join it into a
+  contiguous literal or the guard will block edits to itself.
+- `managed-settings.d/` demonstrates the layered enterprise → team model. Since
+  `add-house-standards-enforcement`, `10-enterprise.json` carries real `permissions.deny`
+  rules (no Python, bun-only, no foreign lockfiles); they bind a machine only once deployed
+  to its managed settings path. `docs/architecture/org-enforcement.md` is the runbook.
