@@ -71,9 +71,9 @@ byte-for-byte copy, performed by `scripts/sync-manifests.sh` and verified in CI.
   pull request whenever either manifest file changes, so drift between the two copies fails CI
   before it reaches a Copilot or VS Code consumer. It is a **separate** workflow file; it does not
   modify `.github/workflows/ci.yml`, which the `add-repo-furniture` workstream owns. The check needs
-  no language runtime or container, so the `node:24` (never `node:20`) pin that applies elsewhere in
-  this program does not apply to this workflow — it runs `sh` directly on the `ubuntu-latest`
-  runner image.
+  no language runtime or container, so the `node:24` pin (never an older Node major) that applies
+  elsewhere in this program does not apply to this workflow — it runs `sh` directly on the
+  `ubuntu-latest` runner image.
 - The generated `.github/plugin/marketplace.json` is committed alongside the script. It is
   generated output, but it is also the thing Copilot/VS Code actually read, so it has to exist in
   the repo, not just be reproducible from the script.
