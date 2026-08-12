@@ -15,8 +15,8 @@
       "name": "patterson-engineering",
       "source": "./plugins/patterson-engineering",
       "displayName": "Patterson Engineering Standards",
-      "description": "Encodes Patterson's IT standards for CI/CD, Azure environments, compute, storage and data classification, and monitoring. Sourced from the ServiceNow IT Standards & Guidelines knowledge base.",
-      "version": "0.1.0",
+      "description": "Encodes Patterson's IT standards for CI/CD, Azure environments, compute, storage and data classification, and monitoring. Sourced from the ServiceNow IT Standards & Guidelines knowledge base. Relevant to engineers, SREs, platform, and architecture roles authoring or reviewing a CI/CD pipeline, provisioning Azure infrastructure, classifying data or choosing storage, configuring monitoring and alerting, or checking whether a tool is approved for use at Patterson.",
+      "version": "0.2.0",
       "author": {
         "name": "Patterson Infra CloudOps"
       },
@@ -28,24 +28,31 @@
         "ci-cd",
         "azure",
         "security",
-        "governance"
+        "governance",
+        "engineer",
+        "sre",
+        "platform",
+        "architect"
       ],
       "relevance": {
-        "roles": ["engineer", "sre", "platform", "architect"],
-        "contexts": [
-          "authoring or reviewing a CI/CD pipeline",
-          "provisioning Azure infrastructure",
-          "classifying data or choosing storage",
-          "configuring monitoring and alerting",
-          "checking whether a tool is approved for use at Patterson"
-        ]
+        "topic": "Patterson engineering standards",
+        "signals": {
+          "filesRead": [
+            "**/azure-pipelines.yml",
+            "**/.github/workflows/*.yml",
+            "**/*.bicep",
+            "**/main.tf",
+            "Dockerfile",
+            "**/Dockerfile"
+          ]
+        }
       }
     },
     {
       "name": "patterson-brand",
       "source": "./plugins/patterson-brand",
       "displayName": "Patterson Brand & Design System",
-      "description": "Patterson Companies brand identity, design tokens, and editorial voice. Ships a drop-in Tailwind v4 + shadcn/ui theme derived from the 2025 Brand Guide.",
+      "description": "Patterson Companies brand identity, design tokens, and editorial voice. Ships a drop-in Tailwind v4 + shadcn/ui theme derived from the 2025 Brand Guide. Relevant to designers, engineers, marketers, and writers building Patterson-branded UI, starting a frontend project that needs Patterson styling, writing customer-facing or internal copy, reviewing work for brand compliance, or building a presentation or document from a Patterson template.",
       "version": "0.1.0",
       "author": {
         "name": "Patterson Corporate Marketing & Communications"
@@ -59,17 +66,22 @@
         "tailwind",
         "shadcn",
         "copywriting",
-        "voice-and-tone"
+        "voice-and-tone",
+        "designer",
+        "engineer",
+        "marketer",
+        "writer"
       ],
       "relevance": {
-        "roles": ["designer", "engineer", "marketer", "writer"],
-        "contexts": [
-          "building any Patterson-branded UI",
-          "starting a new frontend project that needs Patterson styling",
-          "writing customer-facing or internal copy",
-          "reviewing work for brand compliance",
-          "building a presentation or document from a Patterson template"
-        ]
+        "topic": "Patterson brand and design",
+        "signals": {
+          "filesRead": [
+            "**/*.css",
+            "**/tailwind.config.*",
+            "**/*.tsx",
+            "**/*.jsx"
+          ]
+        }
       }
     }
   ]
