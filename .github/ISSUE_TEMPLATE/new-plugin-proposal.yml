@@ -1,0 +1,65 @@
+name: New plugin proposal
+description: Propose a new top-level plugin under plugins/.
+title: "[new-plugin]: "
+labels: ["proposal", "new-plugin"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A new plugin is a durable, cross-cutting capability true for all of Patterson (or a
+        clearly-scoped sub-organization catalog, if that's what you're extending). Read
+        `CONTRIBUTING.md` before filling this in -- every proposal here becomes an OpenSpec
+        change under `openspec/changes/`, not a direct pull request.
+
+  - type: input
+    id: plugin-name
+    attributes:
+      label: Proposed plugin name
+      description: kebab-case, e.g. `patterson-<domain>`.
+      placeholder: patterson-<domain>
+    validations:
+      required: true
+
+  - type: textarea
+    id: capability
+    attributes:
+      label: What capability does this add
+      description: What does an agent installing this plugin become able to do that it cannot do today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance sources
+      description: |
+        Where does the content come from? Name the authoritative source(s) -- a ServiceNow
+        KB article, a SharePoint document, a named policy owner, a published brand guide.
+        Every skill this plugin ships will need a `_SOURCES.md` and `REFERENCES.md` derived
+        from what you list here.
+      placeholder: |
+        e.g. ServiceNow IT Standards & Guidelines, sys_kb_id=..., owner: <team>
+    validations:
+      required: true
+
+  - type: textarea
+    id: gaps
+    attributes:
+      label: Known gaps
+      description: |
+        Where the source material is silent on something the plugin would otherwise need to
+        assert, list it here as a `[TBD: ...]` candidate. Do not fill a gap with a guess.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Acknowledgment
+      options:
+        - label: I understand this proposal must not fill a source-silent gap with an invented answer -- gaps are recorded as `[TBD]`, not resolved by default.
+          required: true
+        - label: I understand every script this plugin ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, and every validator follows the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract.
+          required: true
+        - label: I understand this plugin's tracked content must fit within the repository's 1 MiB tracked-byte budget and must not introduce tracked binaries (fonts, PDFs, Office documents, archives, or raster images over 50 KiB; SVG is exempt).
+          required: true

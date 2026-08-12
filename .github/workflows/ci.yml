@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify-all
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Run the repository gate battery
+        run: sh scripts/verify-all.sh
+
+      # [TBD: whether the `claude` CLI is available in GitHub-hosted runners by default, or
+      # needs to be installed as a prior step, has not been confirmed for this workflow.
+      # Marked continue-on-error so a missing/failing CLI does not block the real gate
+      # (scripts/verify-all.sh, above) while that is resolved.]
+      - name: Validate plugin marketplace manifest (claude plugin validate)
+        continue-on-error: true
+        run: |
+          if command -v claude >/dev/null 2>&1; then
+            claude plugin validate .
+          else
+            echo "claude CLI not found on this runner; skipping (see [TBD] note above)."
+          fi

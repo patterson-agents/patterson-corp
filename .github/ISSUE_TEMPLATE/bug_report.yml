@@ -1,0 +1,60 @@
+name: Bug report
+description: Something in a plugin, skill, agent, hook, or validator script is incorrect or broken.
+title: "[bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem. If this is a **security** issue, stop -- follow
+        `SECURITY.md` instead of filing a public issue.
+
+  - type: input
+    id: location
+    attributes:
+      label: Affected path
+      description: The plugin, skill, agent, hook, or script this affects (e.g. `plugins/patterson-engineering/skills/azure-compute-standards`).
+      placeholder: plugins/<plugin>/skills/<skill>
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you expected, and what actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Exact command(s) run, or the exact skill-triggering prompt, and the output.
+      render: shell
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of bug
+      options:
+        - Incorrect standards content (wrong rule, stale citation, wrong severity)
+        - Validator script false positive or false negative
+        - Skill does not trigger when it should (or triggers when it should not)
+        - Provenance / _SOURCES.md / REFERENCES.md inaccuracy
+        - CI / gate script (verify-all.sh, ci.yml) failure
+        - Other
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I checked this is not already covered by an existing `[TBD]` marker in the relevant skill.
+          required: false
+        - label: I ran `sh scripts/verify-all.sh` and the failure (if any) is included above.
+          required: false

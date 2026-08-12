@@ -1,0 +1,85 @@
+name: New skill proposal
+description: Propose a new skill inside an existing plugin.
+title: "[new-skill]: "
+labels: ["proposal", "new-skill"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If the capability does not fit inside an existing plugin at all, use the
+        **new plugin proposal** template instead. Read `CONTRIBUTING.md` first -- this
+        becomes an OpenSpec change under `openspec/changes/`, not a direct pull request.
+
+  - type: dropdown
+    id: plugin
+    attributes:
+      label: Target plugin
+      options:
+        - patterson-engineering
+        - patterson-brand
+        - a new plugin (use the new-plugin-proposal template instead)
+    validations:
+      required: true
+
+  - type: input
+    id: skill-name
+    attributes:
+      label: Proposed skill name
+      description: kebab-case. This must equal the skill's directory name -- `scripts/verify-all.sh` checks that.
+      placeholder: <domain>-standards
+    validations:
+      required: true
+
+  - type: textarea
+    id: trigger
+    attributes:
+      label: When should this skill fire
+      description: What prompts, questions, or file types should trigger this skill? This becomes the `SKILL.md` `description` frontmatter.
+    validations:
+      required: true
+
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Provenance sources
+      description: |
+        Name the authoritative source(s) this skill's content will be extracted from. This
+        becomes the skill's `_SOURCES.md` (what came from where, with a confidence note) and
+        `REFERENCES.md` (canonical, authoritative locations).
+      placeholder: |
+        e.g. ServiceNow IT Standards & Guidelines, sys_kb_id=..., owner: <team>
+    validations:
+      required: true
+
+  - type: textarea
+    id: validator
+    attributes:
+      label: Executable validator (if applicable)
+      description: |
+        If this skill should ship a `scripts/check-*.ts` validator, describe what it checks
+        and what a compliant vs. violating example looks like. Tests are written before the
+        implementation -- see `CONTRIBUTING.md`.
+    validations:
+      required: false
+
+  - type: textarea
+    id: gaps
+    attributes:
+      label: Known gaps
+      description: |
+        Where the source material is silent on something this skill would otherwise need to
+        assert, list it here as a `[TBD: ...]` candidate. Do not fill a gap with a guess.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Acknowledgment
+      options:
+        - label: I understand this proposal must not fill a source-silent gap with an invented answer -- gaps are recorded as `[TBD]`, not resolved by default.
+          required: true
+        - label: I understand any validator script this skill ships is zero-dependency TypeScript (`node:*` builtins only, erasable syntax, no `package.json`) targeting Node 24, tested before it is implemented, following the `LEVEL|file|line|rule|message` / exit `0`-`1`-`2` contract.
+          required: true
+        - label: I understand this skill's tracked content must fit within the repository's 1 MiB tracked-byte budget and must not introduce tracked binaries (fonts, PDFs, Office documents, archives, or raster images over 50 KiB; SVG is exempt).
+          required: true

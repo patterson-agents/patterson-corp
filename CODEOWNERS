@@ -1,0 +1,30 @@
+# CODEOWNERS for patterson-corp
+#
+# Every top-level path resolves to a reviewing team so GitHub can request review
+# automatically. The team handles below are placeholders pending Patterson platform
+# leadership assigning real ones -- see CONTRIBUTING.md.
+# [TBD: real team handles not specified]
+#
+# Last match wins, so the default at the top is overridden by every more specific
+# entry below it.
+
+* @patterson-agents/platform
+
+/plugins/patterson-engineering/ @patterson-agents/platform-engineering
+/plugins/patterson-brand/       @patterson-agents/platform-brand
+
+/.claude-plugin/                @patterson-agents/platform
+/openspec/                      @patterson-agents/platform
+/scripts/                       @patterson-agents/platform
+/docs/                          @patterson-agents/platform
+
+/.github/                       @patterson-agents/platform
+/.githooks/                     @patterson-agents/platform
+/.devcontainer/                 @patterson-agents/platform
+/.pre-commit-config.yaml        @patterson-agents/platform
+
+/CONTRIBUTING.md                @patterson-agents/platform
+/CODE_OF_CONDUCT.md             @patterson-agents/platform
+/SECURITY.md                    @patterson-agents/platform
+/CODEOWNERS                     @patterson-agents/platform
+/README.md                      @patterson-agents/platform
