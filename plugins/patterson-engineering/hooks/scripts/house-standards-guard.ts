@@ -2,19 +2,12 @@
 /**
  * house-standards-guard.ts -- patterson-engineering PreToolUse hook for Bash|Write|Edit.
  *
- * Hard-blocks the three highest-frequency Patterson house rules:
- *   1. No Python toolchain: python/pip/pipx/uv/poetry/conda/virtualenv in command position,
- *      and no writing of .py/.pyw/.pyi files. TypeScript (bun/node) or Nushell instead.
- *   2. bun is the only package manager: npm/pnpm/yarn/npx in command position are blocked,
- *      as is writing package-lock.json, npm-shrinkwrap.json, yarn.lock, or pnpm-lock.yaml.
- *   3. The June 2026 supply-chain denylist: the four AUR-attack packages and their publisher
- *      are blocked anywhere in a Bash command, and in written content outside docs/tests.
+ * Hard-blocks one Patterson house rule:
+ *   The June 2026 supply-chain denylist: the four AUR-attack packages and their publisher
+ *   are blocked anywhere in a Bash command, and in written content outside docs/tests.
  *
- * The Bash check is token-level, deliberately not a shell parser: commands are split on
- * shell separators and only the first word of each segment is inspected (after skipping
- * VAR=value assignments and transparent wrappers like sudo/env/xargs). A blocked name
- * inside a quoted string handed to an interpreter is NOT caught here; the managed-settings
- * permissions.deny layer and CI are the backstops for that gap.
+ * Toolchain choice is deliberately NOT enforced here. Language and package-manager
+ * selection belong to each repository, not to an org-wide hook.
  *
  * OFF SWITCH
  *   Set PATTERSON_ENGINEERING_HOOKS=off to disable ALL blocking. Would-block notes still
@@ -131,44 +124,6 @@ function checkBash(command: string): string | null {
       );
     }
   }
-  for (const token of commandPositionTokens(command)) {
-    if (PYTHON_TOOL.test(token)) {
-      return (
-        `BLOCKED by patterson-engineering: '${token}' is a Python toolchain command, and ` +
-        "Python is not part of the Patterson platform toolchain. Use zero-dependency " +
-        "TypeScript (bun run script.ts / node script.ts) or Nushell instead.\n" +
-        OFF_SWITCH_NOTE
-      );
-    }
-    if (FOREIGN_PM.test(token)) {
-      return (
-        `BLOCKED by patterson-engineering: '${token}' is not the Patterson package manager. ` +
-        "bun is the only approved package manager (bun install / bun add / bunx), and " +
-        "bun.lock is the only lockfile.\n" +
-        OFF_SWITCH_NOTE
-      );
-    }
-  }
-  return null;
-}
-
-function checkTargetPath(targetPath: string): string | null {
-  if (PY_EXT.test(targetPath)) {
-    return (
-      `BLOCKED by patterson-engineering: '${targetPath}' is a Python file, and Python is ` +
-      "not part of the Patterson platform toolchain. Implement this in zero-dependency " +
-      "TypeScript or Nushell instead.\n" +
-      OFF_SWITCH_NOTE
-    );
-  }
-  if (FOREIGN_LOCKFILES.has(path.basename(targetPath).toLowerCase())) {
-    return (
-      `BLOCKED by patterson-engineering: '${path.basename(targetPath)}' is a non-bun ` +
-      "lockfile. bun.lock is the only lockfile in Patterson repositories; a foreign " +
-      "lockfile is a bug to remove, not a file to write.\n" +
-      OFF_SWITCH_NOTE
-    );
-  }
   return null;
 }
 
@@ -247,8 +202,7 @@ function main(): void {
     if (command) reason = checkBash(command);
   } else {
     const [target, text] = extract(ti);
-    reason = checkTargetPath(target);
-    if (reason === null && text) reason = checkContent(target, text);
+    if (text) reason = checkContent(target, text);
   }
 
   if (reason !== null) {
