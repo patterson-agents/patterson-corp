@@ -1,0 +1,28 @@
+# Template: .github/dependabot.yml
+#
+# Install to:  .github/dependabot.yml   (repository root, not this skill's directory)
+#
+# github-actions is the ONLY ecosystem declared here, deliberately.
+#
+# Patterson agent-configuration repositories are zero-dependency by design: no package
+# manifest, no lockfile, no vendored modules. Declaring a package ecosystem that has no
+# manifest to read produces a Dependabot error on every scheduled run, which trains
+# reviewers to ignore the Dependabot tab. Add an ecosystem only when the corresponding
+# manifest actually lands in the repository.
+#
+# What this covers: the pinned action versions used by the repository's workflows. That is
+# the repository's real third-party dependency surface.
+
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      # Conventional-commit prefix, matching the repository's commitlint configuration.
+      prefix: "chore"
+    labels:
+      - "dependencies"
+      - "github-actions"

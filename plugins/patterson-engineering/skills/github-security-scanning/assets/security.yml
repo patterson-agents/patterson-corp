@@ -1,0 +1,100 @@
+# Template: .github/workflows/security.yml
+#
+# Install to:  .github/workflows/security.yml   (repository root, not this skill's directory)
+#
+# Scope of this template: only the scanners that the CI/CD Pipeline Standards and the Approved
+# Software standard actually sanction are wired up.
+#
+#   GitLeaks  -- secret scanning. Approved, no approval needed.
+#                (CI/CD Pipeline Standards, sys_kb_id=c70e79833b650f107f43b50236e45a7d)
+#   Trivy     -- container scanning. Approved. The Approved Software standard records
+#                "Checkmarx will replace this tool" against Trivy; it remains approved today.
+#
+# Checkmarx (SAST, SCA, API scanning, IaC scanning) requires approval before use and is
+# therefore left commented out below rather than wired up on the reader's behalf:
+#   [TBD: this skill has no Patterson source for a Checkmarx tenant URL, project naming
+#   convention, or credential-provisioning process.]
+#
+# This workflow is not DAST. GitLeaks reads files and Trivy reads files, images and
+# manifests; neither exercises a running application. The DAST row of the control-coverage
+# table stays open and is addressed to AppSec. See references/required-scans-mapping.md.
+#
+# Actions are pinned by version, and .github/dependabot.yml (github-actions ecosystem) keeps
+# those pins current.
+
+name: security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 7 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  secret-scan:
+    name: Secret scanning (GitLeaks)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # GitLeaks scans history, not just the working tree.
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITLEAKS_LICENSE is required for organization-owned repositories.
+          # [TBD: this skill has no Patterson source naming the org licence secret. Confirm
+          # the secret name with AppSec before enabling on an org repository.]
+
+  filesystem-scan:
+    name: Dependency and misconfiguration scanning (Trivy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Trivy's action does not publish a floating major-version tag, so an exact version is
+      # pinned here. Dependabot's github-actions ecosystem raises the bump.
+      - name: Run trivy in filesystem mode
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scanners: vuln,misconfig
+          format: sarif
+          output: trivy-results.sarif
+          # Report everything; gate on severity in branch policy, not by hiding findings.
+          severity: CRITICAL,HIGH,MEDIUM
+          exit-code: "0"
+
+      - name: Upload trivy results to code scanning
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trivy-results.sarif
+          category: trivy-fs
+
+  # container-scan:
+  #   Enable when the repository builds an image. Trivy image mode covers the container
+  #   scanning control; approved base images are a separate requirement, covered by the
+  #   azure-compute-standards skill.
+  #
+  # checkmarx:
+  #   SAST, SCA, API scanning and IaC scanning are Checkmarx controls under the CI/CD
+  #   Pipeline Standards, and Checkmarx requires approval. Do not wire this job up without
+  #   an approved Checkmarx tenant.
+  #   [TBD: no Patterson source specifies the Checkmarx GitHub Action, tenant URL, or
+  #   credential names.]
