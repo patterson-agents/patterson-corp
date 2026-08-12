@@ -8,6 +8,20 @@
 repos:
   - repo: local
     hooks:
+      - id: patterson-secrets-scan
+        name: TruffleHog + Trivy secret scan
+        description: Scans pending changes for credentials; skips gracefully when a scanner is not installed.
+        entry: >-
+          sh -c 'if command -v trufflehog >/dev/null 2>&1; then
+          trufflehog git file://. --since-commit HEAD --results=verified,unknown --fail --no-update --exclude-paths .trufflehog-exclude.txt;
+          else echo "trufflehog not installed -- skipped"; fi;
+          if command -v trivy >/dev/null 2>&1; then
+          trivy fs --scanners secret --exit-code 1 --quiet --skip-dirs plugins/patterson-engineering/hooks/tests .;
+          else echo "trivy not installed -- skipped"; fi'
+        language: system
+        pass_filenames: false
+        always_run: true
+
       - id: patterson-plugin-suites
         name: Patterson plugin test suites
         description: Runs every run-tests.sh under plugins/.

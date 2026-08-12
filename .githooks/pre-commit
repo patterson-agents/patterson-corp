@@ -16,6 +16,36 @@ set -eu
 ROOT=$(CDPATH= cd -- "$(git rev-parse --show-toplevel)" && pwd)
 cd "$ROOT"
 
+# --- secrets scanning: TruffleHog + Trivy -----------------------------------------------
+# Both scan the working tree for credentials before the commit exists. Graceful skip when
+# a scanner is not installed (install both with: mise use trufflehog trivy) -- the
+# PreToolUse guards and GitHub push protection remain the backstops. The hook test
+# fixtures' synthetic secrets are excluded (.trufflehog-exclude.txt / --skip-dirs), same
+# as .github/secret_scanning.yml does for GitHub's scanner.
+if command -v trufflehog >/dev/null 2>&1; then
+  echo "pre-commit: trufflehog secret scan..."
+  if ! trufflehog git "file://$ROOT" --since-commit HEAD --results=verified,unknown \
+       --fail --no-update --exclude-paths "$ROOT/.trufflehog-exclude.txt" >/dev/null 2>&1; then
+    echo "pre-commit: FAILED trufflehog found a secret in the pending changes." >&2
+    echo "pre-commit: run 'trufflehog git file://. --since-commit HEAD --results=verified,unknown --no-update' to see it. commit blocked." >&2
+    exit 1
+  fi
+else
+  echo "pre-commit: trufflehog not installed -- skipping secret scan (mise use trufflehog)."
+fi
+
+if command -v trivy >/dev/null 2>&1; then
+  echo "pre-commit: trivy secret scan..."
+  if ! trivy fs --scanners secret --exit-code 1 --quiet \
+       --skip-dirs plugins/patterson-engineering/hooks/tests "$ROOT" >/dev/null 2>&1; then
+    echo "pre-commit: FAILED trivy found a secret in the working tree." >&2
+    echo "pre-commit: run 'trivy fs --scanners secret --skip-dirs plugins/patterson-engineering/hooks/tests .' to see it. commit blocked." >&2
+    exit 1
+  fi
+else
+  echo "pre-commit: trivy not installed -- skipping secret scan (mise use trivy)."
+fi
+
 echo "pre-commit: running plugin test suites..."
 suite_count=0
 for suite in $(find plugins -name 'run-tests.sh' | sort); do

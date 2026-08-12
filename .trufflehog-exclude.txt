@@ -1,0 +1,5 @@
+# Paths excluded from TruffleHog scanning (regex per line, passed via --exclude-paths).
+# The hook test fixtures carry deliberately synthetic secrets; they are likewise
+# excluded from GitHub secret scanning via .github/secret_scanning.yml.
+plugins/patterson-engineering/hooks/tests/
+\.git/
