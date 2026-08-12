@@ -1,0 +1,51 @@
+token,descriptive_name,hex,rgb,cmyk,pms,tier,role,source
+pat-navy,Deep Institutional Navy,#003767,"0,55,103","100,55,0,55",540,primary,Headlines / brand accents / dark grounds,BG25 p.24
+pat-sky,Bright Clinical Sky Blue,#00A8E1,"0,168,225","73,15,0,0",2995,primary,Default CTA and accent,BG25 p.24
+pat-gray,Warm Slate Gray,#58585B,"88,88,91","0,0,0,80",Cool Gray 11,primary,Body copy and dividers,BG25 p.24
+pat-white,Pure Paper White,#FFFFFF,"255,255,255",,,primary,Background for content-heavy applications,BG25 p.24
+pat-blue,Confident Mid Blue,#147EC2,"20,126,194","83,43,0,0",7683,secondary,Supporting depth,BG25 p.24
+pat-blue-light,Soft Aqua Blue,#6DCFF6,"109,207,246","50,0,0,0",297,secondary,Light supporting fields,BG25 p.24
+pat-gray-light,Barely-There Cool Gray,#ECECEC,"236,236,236","5,4,4,0",Cool Gray 1 @ 50%,secondary,Accent gray on web and email,BG25 p.24
+pat-green,Fresh Meadow Green,#7BC24D,"123,194,77","56,0,93,0",369,tertiary,Infographics and presentations,BG25 p.24
+pat-teal,Deep Sea Teal,#00817D,"0,129,125","100,0,45,30",7718,tertiary,Infographics; eyebrow text color,BG25 p.24 / DPL
+pat-purple,Rich Royal Purple,#522E91,"82,46,145","80,100,0,0",7679,tertiary,Infographics and presentations,BG25 p.24
+pat-navy-75,Muted Steel Navy,#40698D,,,,tint,75% navy over white,BG25 p.24 (sampled)
+pat-navy-50,Hazy Slate Blue,#809BB3,,,,tint,50% navy over white,BG25 p.24 (sampled)
+pat-navy-25,Pale Mist Blue,#BFCDD9,,,,tint,25% navy over white,BG25 p.24 (sampled)
+pat-sky-75,Softened Sky,#40BEE8,,,,tint,75% sky over white,BG25 p.24 (sampled)
+pat-sky-50,Washed Sky,#80D4F0,,,,tint,50% sky over white,BG25 p.24 (sampled)
+pat-sky-25,Faint Sky,#BFE9F8,,,,tint,25% sky over white,BG25 p.24 (sampled)
+pat-gray-75,Softened Slate,#828284,,,,tint,75% gray over white,BG25 p.24 (sampled)
+pat-gray-50,Washed Slate,#ACACAD,,,,tint,50% gray over white,BG25 p.24 (sampled)
+pat-gray-25,Faint Slate,#D5D5D6,,,,tint,25% gray over white,BG25 p.24 (sampled)
+pat-blue-75,Softened Mid Blue,#4F9ED1,,,,tint,75% blue over white,BG25 p.24 (sampled)
+pat-blue-50,Washed Mid Blue,#8ABEE0,,,,tint,50% blue over white,BG25 p.24 (sampled)
+pat-blue-25,Faint Mid Blue,#C4DFF0,,,,tint,25% blue over white,BG25 p.24 (sampled)
+pat-blue-light-75,Softened Aqua,#92DBF8,,,,tint,75% light blue over white,BG25 p.24 (sampled)
+pat-blue-light-50,Washed Aqua,#B6E7FA,,,,tint,50% light blue over white,BG25 p.24 (sampled)
+pat-blue-light-25,Faint Aqua,#DAF3FD,,,,tint,25% light blue over white,BG25 p.24 (sampled)
+pat-green-75,Softened Meadow,#9CD17A,,,,tint,75% green over white,BG25 p.24 (sampled)
+pat-green-50,Washed Meadow,#BDE0A6,,,,tint,50% green over white,BG25 p.24 (sampled)
+pat-green-25,Faint Meadow,#DEF0D2,,,,tint,25% green over white,BG25 p.24 (sampled)
+pat-teal-75,Softened Sea Teal,#40A09E,,,,tint,75% teal over white,BG25 p.24 (sampled)
+pat-teal-50,Washed Sea Teal,#80C0BE,,,,tint,50% teal over white,BG25 p.24 (sampled)
+pat-teal-25,Faint Sea Teal,#BFE0DE,,,,tint,25% teal over white,BG25 p.24 (sampled)
+pat-purple-75,Softened Royal,#7D62AC,,,,tint,75% purple over white,BG25 p.24 (sampled)
+pat-purple-50,Washed Royal,#A896C8,,,,tint,50% purple over white,BG25 p.24 (sampled)
+pat-purple-25,Faint Royal,#D4CBE4,,,,tint,25% purple over white,BG25 p.24 (sampled)
+pat-digital-sky,Tempered Digital Sky,#269BCB,,,,digital,Primary interactive on screen (WCAG-adjusted),DS20 p.7
+pat-digital-link,Readable Link Blue,#147CBD,,,,digital,Text links on white or light gray,DS20 p.8
+pat-digital-grey-medium,Neutral Medium Gray,#9B9B9B,,,,digital,Secondary text,DS20 p.7
+pat-digital-grey-light,Faint Page Gray,#F8F8F8,,,,digital,Section backgrounds,DS20 p.7
+pat-digital-green,Signal Green,#0CA50F,,,,digital,Accent and success state,DS20 p.8
+pat-digital-teal,Muted Digital Teal,#008E8B,,,,digital,Accent on light and dark,DS20 p.8
+pat-digital-purple,Digital Purple on Light,#512E91,,,,digital,Accent on light grounds,DS20 p.8
+pat-digital-purple-dark,Luminous Violet,#9660F3,,,,digital,Accent on navy or dark grounds,DS20 p.8
+pat-navy-deep,Near-Black Navy,#001C34,,,,neutral,Navy pressed / hover state,DPL
+pat-rule,Hairline Gray,#D8D8D8,,,,neutral,Horizontal rules and dividers,DPL
+pat-field-border,Field Edge Gray,#A8A9AC,,,,neutral,Input border and disabled control,DPL
+pat-disabled-bg,Dormant Gray,#F0F0F0,,,,neutral,Disabled field background,DPL
+pat-error,Alert Crimson,#D0021B,,,,status,Error message box and error text,DPL
+pat-success,Signal Green,#0CA50F,,,,status,Positive message box,DPL
+pat-urgent,Deep Institutional Navy,#003767,,,,status,Urgent message box (white text),DPL
+pat-warning,Attention Amber,#F5A623,,,,status,Warning text and warning eyebrow,DPL

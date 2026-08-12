@@ -1,0 +1,20 @@
+{
+  "name": "patterson-brand",
+  "version": "0.1.0",
+  "description": "Patterson Companies brand identity, design tokens, and editorial voice, including a drop-in Tailwind v4 and shadcn/ui theme.",
+  "author": {
+    "name": "Patterson Corporate Marketing & Communications"
+  },
+  "homepage": "https://github.com/patterson-agents/patterson-corp/tree/main/plugins/patterson-brand",
+  "repository": "https://github.com/patterson-agents/patterson-corp",
+  "license": "UNLICENSED",
+  "keywords": [
+    "brand",
+    "design-system",
+    "design-tokens",
+    "tailwind",
+    "shadcn",
+    "copywriting",
+    "patterson"
+  ]
+}

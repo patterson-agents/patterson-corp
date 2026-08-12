@@ -1,0 +1,495 @@
+/* ============================================================================
+   Patterson Companies — Tailwind CSS v4 theme
+   ----------------------------------------------------------------------------
+   DROP-IN USAGE
+     @import "tailwindcss";
+     @import "./theme.css";
+
+   Tailwind v4 is CSS-first: this file IS the config. There is no
+   tailwind.config.js. Every value below traces to a Patterson source document;
+   the source is named in the comment on (or immediately above) the line.
+
+   SOURCE KEYS
+     [BG25 p.N]  Patterson Companies Brand Guide 2025 (VERSION 3.2025), page N
+     [DS20 p.N]  DesignSystem_042120.pdf (Patterson design system + governance,
+                 April 2020), slide N
+     [DPL]       Patterson Digital Pattern Library v5.7.2 production stylesheet
+                 (cdn.cloud.pattersoncompanies.com/patternlibrary/releases/5.7.2/
+                 assets/toolkit/styles/toolkit.css) — the shipped implementation
+                 of DS20. Local copy under downloads/ (see _SOURCES.md).
+     [PCOM]      pattersoncompanies.com WordPress theme-styles.min.css v3.2.2
+
+   NOTHING IN THIS FILE IS INVENTED. Where a value could not be extracted it is
+   omitted and recorded as [TBD] in DESIGN.md rather than guessed.
+   ============================================================================ */
+
+@theme {
+  /* ==========================================================================
+     TYPEFACES
+     Proxima Nova is the Patterson brand font [BG25 p.25]. It is a licensed
+     Adobe Fonts (Typekit) family. Load kit uth1qfm in the document head:
+
+       <link rel="stylesheet" href="https://use.typekit.net/uth1qfm.css">
+
+     uth1qfm serves 400/500/600/700/800 in normal and italic, so the Semibold
+     600 and Extrabold 800 declared further down this file render as real
+     faces. The other kit in evidence, rul6mjk, serves only 400/700 (normal
+     and italic) and leaves the browser to synthesise 600 and 800 — it is
+     superseded here and should not be used.
+
+     REFERENCE THE KIT; SHIP NOTHING. Adobe's terms serve fonts from Adobe's
+     CDN via a kit ID and grant no right to extract, re-host or bundle the
+     binaries. This file therefore contains no @font-face rule and the plugin
+     contains no font file, deliberately.
+     See brand-identity/references/typography.md section 2.
+
+     Production stack is verbatim from [DPL]: proxima-nova, Arial, sans-serif.
+     Arial is the sanctioned OfficeSuite / fallback face [BG25 p.25].
+     ========================================================================== */
+  --font-sans: "proxima-nova", Arial, sans-serif;            /* [DPL] body{} */
+  --font-pat-office: Arial, Helvetica, sans-serif;           /* [BG25 p.25] Outlook/PowerPoint/Teams/SharePoint */
+
+  /* ==========================================================================
+     BRAND COLOR — PRIMARY [BG25 p.24]
+     Corroborated verbatim as CSS custom properties in [PCOM].
+     ========================================================================== */
+  --color-pat-navy:        #003767;   /* PMS 540 / CMYK 100 55 0 55 / RGB 0 55 103 */
+  --color-pat-sky:         #00A8E1;   /* PMS 2995 / CMYK 73 15 0 0 / RGB 0 168 225 */
+  --color-pat-gray:        #58585B;   /* PMS Cool Gray 11 (80% black) — body copy */
+  --color-pat-white:       #FFFFFF;   /* [BG25 p.24, p.52] */
+
+  /* ---- SECONDARY [BG25 p.24] ---------------------------------------------- */
+  --color-pat-blue:        #147EC2;   /* PMS 7683 */
+  --color-pat-blue-light:  #6DCFF6;   /* PMS 297 */
+  --color-pat-gray-light:  #ECECEC;   /* PMS Cool Gray 1 @ 50% — web/email accent gray */
+
+  /* ---- TERTIARY [BG25 p.24] — infographics & presentations ---------------- */
+  --color-pat-green:       #7BC24D;   /* PMS 369 */
+  --color-pat-teal:        #00817D;   /* PMS 7718 */
+  --color-pat-purple:      #522E91;   /* PMS 7679 */
+
+  /* ==========================================================================
+     TINTS [BG25 p.24 — "Tints of the Patterson color palette are an option if
+     used sparingly."]
+     The guide prints unlabelled swatches. Sampling the vector swatch fills on
+     p.24 shows a uniform 75% / 50% / 25% ramp over white for every palette
+     color. Values below are that documented ramp applied to the published
+     base hexes (round-half-up); they render within +/-1 of the PDF swatches.
+     ========================================================================== */
+  --color-pat-navy-75:        #40698D;
+  --color-pat-navy-50:        #809BB3;
+  --color-pat-navy-25:        #BFCDD9;
+  --color-pat-sky-75:         #40BEE8;
+  --color-pat-sky-50:         #80D4F0;
+  --color-pat-sky-25:         #BFE9F8;
+  --color-pat-gray-75:        #828284;
+  --color-pat-gray-50:        #ACACAD;
+  --color-pat-gray-25:        #D5D5D6;
+  --color-pat-blue-75:        #4F9ED1;
+  --color-pat-blue-50:        #8ABEE0;
+  --color-pat-blue-25:        #C4DFF0;
+  --color-pat-blue-light-75:  #92DBF8;
+  --color-pat-blue-light-50:  #B6E7FA;
+  --color-pat-blue-light-25:  #DAF3FD;
+  --color-pat-green-75:       #9CD17A;
+  --color-pat-green-50:       #BDE0A6;
+  --color-pat-green-25:       #DEF0D2;
+  --color-pat-teal-75:        #40A09E;
+  --color-pat-teal-50:        #80C0BE;
+  --color-pat-teal-25:        #BFE0DE;
+  --color-pat-purple-75:      #7D62AC;
+  --color-pat-purple-50:      #A896C8;
+  --color-pat-purple-25:      #D4CBE4;
+
+  /* ==========================================================================
+     DIGITAL (WCAG-ADJUSTED) PALETTE [DS20 p.7–8], shipped in [DPL]
+     DS20: "A digital color system has been identified to comply with WCAG 2.0
+     accessibility standards." These are DIFFERENT hexes from the print palette
+     above and are the ones actually rendered by Patterson web properties.
+     See DESIGN.md > Conflicts before choosing between the two sets.
+     ========================================================================== */
+  --color-pat-digital-sky:          #269BCB;  /* [DS20 p.7] sky blue, digital  */
+  --color-pat-digital-link:         #147CBD;  /* [DS20 p.8] link blue, on light */
+  --color-pat-digital-grey-medium:  #9B9B9B;  /* [DS20 p.7] */
+  --color-pat-digital-grey-light:   #F8F8F8;  /* [DS20 p.7] backgrounds */
+  --color-pat-digital-green:        #0CA50F;  /* [DS20 p.8] accent green */
+  --color-pat-digital-teal:         #008E8B;  /* [DS20 p.8] accent teal, on dark */
+  --color-pat-digital-purple:       #512E91;  /* [DS20 p.8] accent purple, on light */
+  --color-pat-digital-purple-dark:  #9660F3;  /* [DS20 p.8] accent purple, on navy */
+  --color-pat-navy-deep:            #001C34;  /* [DPL] .button--dark:hover, navy pressed */
+  --color-pat-rule:                 #D8D8D8;  /* [DPL] hr, dividers */
+  --color-pat-field-border:         #A8A9AC;  /* [DPL] input/select border, disabled */
+  --color-pat-disabled-bg:          #F0F0F0;  /* [DPL] disabled field background */
+
+  /* ==========================================================================
+     STATUS [DPL .message-box--*] — Patterson's real alert colors.
+     DS20 p.37 names the four states: Positive, Error, Neutral, Urgent.
+     ========================================================================== */
+  --color-pat-error:    #D0021B;  /* [DPL] .message-box--error, .error-text, form errors */
+  --color-pat-success:  #0CA50F;  /* [DPL] .message-box--success (= DS20 accent green) */
+  --color-pat-urgent:   #003767;  /* [DPL] .message-box--alert (navy fill, white text) */
+  --color-pat-warning:  #F5A623;  /* [DPL] .with--text-orange, .eyebrow--orange */
+
+  /* ==========================================================================
+     SPACING — Patterson digital work is on a 5px grid.
+     [DPL] padding steps: 5 10 15 20 25 30 50 60 80px. [BG25 p.57] button
+     horizontal padding = 30px. Setting Tailwind's base unit to 5px makes
+     p-1..p-16 land on the Patterson grid (p-2 = 10px, p-6 = 30px).
+     To revert to Tailwind's stock 4px grid, delete the next line.
+     ========================================================================== */
+  --spacing: 0.3125rem;   /* 5px */
+
+  /* ==========================================================================
+     RADII — [BG25 p.57] "Rounded corners: 5px radius".
+     [DPL] border-radius:5px is the dominant value (20 occurrences).
+     ========================================================================== */
+  --radius-pat: 5px;
+
+  /* ==========================================================================
+     TYPE SCALE — [DPL] .rtf headings + body + control text.
+     Line heights are the shipped values, which match [BG25 p.27]:
+     headline leading 75%–125% of size, body copy 125%–150% of size.
+     ========================================================================== */
+  --text-pat-h1: 36px;                    /* [DPL] .rtf h1 desktop */
+  --text-pat-h1--line-height: 1.25;
+  --text-pat-h1--font-weight: 800;        /* Proxima Nova Extrabold [BG25 p.25] */
+  --text-pat-h1-mobile: 24px;             /* [DPL] .rtf h1 @max-width:600px */
+  --text-pat-h1-mobile--line-height: 1.15;
+  --text-pat-h2: 24px;                    /* [DPL] .rtf h2 */
+  --text-pat-h2--line-height: 1.3;
+  --text-pat-h2--font-weight: 700;
+  --text-pat-h3: 18px;                    /* [DPL] .rtf h3 */
+  --text-pat-h3--line-height: 1.3;
+  --text-pat-h3--font-weight: 700;
+  --text-pat-body: 18px;                  /* [DPL] body{} */
+  --text-pat-body--line-height: 1.5;
+  --text-pat-eyebrow: 15px;               /* [DPL] .eyebrow */
+  --text-pat-eyebrow--line-height: 19px;
+  --text-pat-eyebrow--font-weight: 700;
+  --text-pat-cta: 15px;                   /* [BG25 p.57] "Proxima Nova Semibold, 15px" */
+  --text-pat-cta--line-height: 1.15;      /* [DPL] .button */
+  --text-pat-cta--font-weight: 600;
+  --text-pat-sm: 13px;                    /* [DPL] second most common size */
+
+  /* ==========================================================================
+     LETTER SPACING — [BG25 p.27] tracking in InDesign units (1/1000 em).
+     Tracking -10 => -0.01em; -25 (large scale) => -0.025em; body 0 to -10.
+     ========================================================================== */
+  --tracking-pat-tight: -0.025em;   /* tracking -25, large scale only */
+  --tracking-pat-snug: -0.01em;     /* tracking -10, default for headings/CTA */
+  --tracking-pat-none: 0em;         /* body copy upper bound; CTA buttons [BG25 p.57] */
+
+  /* ==========================================================================
+     LAYOUT — [DPL] breakpoints and container.
+     Namespaced (pat-*) so stock Tailwind sm/md/lg/xl are left intact.
+     ========================================================================== */
+  --breakpoint-pat-mobile: 600px;
+  --breakpoint-pat-tablet: 900px;
+  --breakpoint-pat-desktop: 1300px;
+  --container-pat: 1300px;          /* [DPL] max-width:1300px page wrapper */
+
+  /* ==========================================================================
+     CONTROL SIZING
+     [BG25 p.57] button height 46px. [DPL] .button min-height 45px. Both given;
+     the 2025 Brand Guide is authoritative for design, DPL for existing code.
+     ========================================================================== */
+  --size-pat-control: 46px;         /* [BG25 p.57] */
+  --size-pat-control-dpl: 45px;     /* [DPL] .button, .quantity-input__button */
+  --size-pat-icon: 80px;            /* [DS20 p.18/35/38] + ImageSpecs: SVG icons 80x80 */
+}
+
+/* ============================================================================
+   shadcn/ui SEMANTIC CONTRACT
+   ----------------------------------------------------------------------------
+   Every variable below is a Patterson value, not a re-derivation.
+
+   NOTE ON --primary: [BG25 p.57] states the default button color is Patterson
+   sky #00A8E1 with white text. [DS20 p.7-8] replaced that with #269BCB for
+   digital specifically to satisfy WCAG 2.0 contrast, and [DPL] .button ships
+   #269BCB. White on #00A8E1 is ~2.3:1 (fails WCAG AA for any text size);
+   white on #269BCB is ~3.4:1 (passes AA for large text / UI components only).
+   Default here follows the newer, authoritative 2025 Brand Guide. Add the
+   class `patterson-a11y` to <html> to switch to the WCAG-adjusted digital
+   palette (see the block below).
+   ============================================================================ */
+:root {
+  --radius: 5px;                       /* [BG25 p.57] */
+
+  --background: #FFFFFF;               /* [BG25 p.24] white for content-heavy apps */
+  --foreground: #58585B;               /* [BG25 p.24] 80% black for body copy; [DPL] body color */
+
+  --card: #FFFFFF;                     /* [BG25 p.24] */
+  --card-foreground: #58585B;          /* [DPL] body */
+
+  --popover: #FFFFFF;                  /* [BG25 p.24] */
+  --popover-foreground: #58585B;       /* [DPL] body */
+
+  --primary: #00A8E1;                  /* [BG25 p.57] default button = sky blue */
+  --primary-foreground: #FFFFFF;       /* [BG25 p.57] "Text/CTA ... White" */
+
+  --secondary: #FFFFFF;                /* [DPL] .button--secondary bg */
+  --secondary-foreground: #003767;     /* [DPL] .button--secondary color + 1px navy border */
+
+  --muted: #F8F8F8;                    /* [DS20 p.7] light grey, backgrounds */
+  --muted-foreground: #9B9B9B;         /* [DS20 p.7] medium grey */
+
+  --accent: #BFE9F8;                   /* [BG25 p.24] sky @ 25% tint */
+  --accent-foreground: #003767;        /* [BG25 p.24] navy */
+
+  --destructive: #D0021B;              /* [DPL] .message-box--error / .error-text */
+  --destructive-foreground: #FFFFFF;   /* [DPL] white on filled error */
+
+  --border: #D8D8D8;                   /* [DPL] hr / divider rule */
+  --input: #A8A9AC;                    /* [DPL] input[type=*] border */
+  --ring: #00A8E1;                     /* [BG25 p.24] sky */
+
+  /* Extras shadcn charts + Patterson status. Chart ramp is the tertiary
+     palette [BG25 p.24], which the guide designates for infographics. */
+  --chart-1: #003767;
+  --chart-2: #00A8E1;
+  --chart-3: #7BC24D;
+  --chart-4: #00817D;
+  --chart-5: #522E91;
+
+  --success: #0CA50F;                  /* [DPL] .message-box--success */
+  --success-foreground: #FFFFFF;
+  --warning: #F5A623;                  /* [DPL] .with--text-orange */
+  --warning-foreground: #003767;
+  --urgent: #003767;                   /* [DPL] .message-box--alert */
+  --urgent-foreground: #FFFFFF;
+
+  /* Sidebar rail — navy ground is a documented Patterson emphasis surface
+     [BG25 p.52 video standards: navy #003767 full-frame background]. */
+  --sidebar: #003767;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #00A8E1;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #40698D;           /* navy @ 75% tint [BG25 p.24] */
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #40698D;
+  --sidebar-ring: #00A8E1;
+}
+
+/* ----------------------------------------------------------------------------
+   DARK / NAVY-GROUND VARIANT
+   Patterson does not publish a "dark mode". It DOES publish an on-dark system:
+   [DS20 p.8] gives an explicit accent set "for use on dark backgrounds (navy)",
+   and [BG25 p.52] specifies solid navy #003767 as a full-frame ground with the
+   logo reversed. This variant uses only those documented on-navy values.
+   ---------------------------------------------------------------------------- */
+.dark {
+  --background: #003767;               /* [BG25 p.52] navy ground */
+  --foreground: #FFFFFF;               /* [BG25 p.14] white reverse */
+
+  --card: #40698D;                     /* navy @ 75% tint [BG25 p.24] */
+  --card-foreground: #FFFFFF;
+  --popover: #40698D;
+  --popover-foreground: #FFFFFF;
+
+  --primary: #269BCB;                  /* [DS20 p.8] sky blue for dark backgrounds */
+  --primary-foreground: #FFFFFF;       /* [DPL] .button color */
+
+  --secondary: #001C34;                /* [DPL] .button--dark:hover */
+  --secondary-foreground: #FFFFFF;
+
+  --muted: #40698D;                    /* navy @ 75% tint [BG25 p.24] */
+  --muted-foreground: #BFCDD9;         /* navy @ 25% tint [BG25 p.24] */
+
+  --accent: #147EC2;                   /* [BG25 p.24] secondary blue */
+  --accent-foreground: #FFFFFF;
+
+  --destructive: #D0021B;              /* [DPL] — see DESIGN.md, no on-navy red is published */
+  --destructive-foreground: #FFFFFF;
+
+  --border: #40698D;
+  --input: #809BB3;                    /* navy @ 50% tint [BG25 p.24] */
+  --ring: #269BCB;                     /* [DS20 p.8] */
+
+  --chart-1: #6DCFF6;                  /* [BG25 p.24] secondary light blue */
+  --chart-2: #269BCB;                  /* [DS20 p.8] */
+  --chart-3: #0CA50F;                  /* [DS20 p.8] accent green, on dark */
+  --chart-4: #008E8B;                  /* [DS20 p.8] accent teal, on dark */
+  --chart-5: #9660F3;                  /* [DS20 p.8] accent purple, on dark */
+
+  --success: #0CA50F;                  /* [DS20 p.8] */
+  --success-foreground: #FFFFFF;
+  --warning: #F5A623;                  /* [DPL] */
+  --warning-foreground: #003767;
+  --urgent: #FFFFFF;
+  --urgent-foreground: #003767;
+
+  --sidebar: #001C34;                  /* [DPL] */
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #269BCB;          /* [DS20 p.8] */
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #40698D;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #40698D;
+  --sidebar-ring: #269BCB;
+}
+
+/* ----------------------------------------------------------------------------
+   OPT-IN: WCAG-ADJUSTED DIGITAL PALETTE
+   Add class="patterson-a11y" to <html> (alongside .dark if desired) to swap the
+   print sky/link/green/teal for the DS20 digital equivalents, which exist
+   precisely because the print hexes miss WCAG 2.0 contrast on white.
+   [DS20 p.7-8]
+   ---------------------------------------------------------------------------- */
+.patterson-a11y {
+  --primary: #269BCB;                  /* [DS20 p.7] */
+  --ring: #269BCB;
+  --sidebar-primary: #269BCB;
+  --chart-2: #269BCB;
+  --chart-3: #0CA50F;                  /* [DS20 p.8] */
+  --chart-4: #008E8B;                  /* [DS20 p.8] */
+  --chart-5: #512E91;                  /* [DS20 p.8] purple on light */
+}
+.patterson-a11y a { color: #147CBD; }  /* [DS20 p.8] link blue on white/light grey */
+
+/* ----------------------------------------------------------------------------
+   Expose the semantic contract to Tailwind v4 utilities.
+   Mirrors the @theme inline block shadcn/ui emits.
+   ---------------------------------------------------------------------------- */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-urgent: var(--urgent);
+  --color-urgent-foreground: var(--urgent-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 5px);
+}
+
+/* ----------------------------------------------------------------------------
+   BASE ELEMENT DEFAULTS
+   Only rules with a direct source citation. Sentence case is a hard brand rule
+   in 2025: [BG25 p.25] "All caps are to be avoided in any digital channel since
+   this is regarded as shouting"; [BG25 p.59] titles, headlines, subheads, text
+   and captions are ALL sentence case.
+   ---------------------------------------------------------------------------- */
+@layer base {
+  body {
+    font-family: var(--font-sans);
+    font-weight: 400;                       /* [DPL] body */
+    font-size: 18px;                        /* [DPL] body */
+    line-height: 1.5;                       /* [DPL] body */
+    color: var(--foreground);
+    background-color: var(--background);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--color-pat-navy);           /* [DPL] .rtf h1/h2/h3 color:#003767 */
+    letter-spacing: var(--tracking-pat-snug); /* [BG25 p.27] tracking -10 */
+    text-transform: none;                   /* [BG25 p.25/p.26/p.59] sentence case */
+  }
+  h1 { font-size: 36px; line-height: 1.25; font-weight: 800; margin-bottom: 20px; } /* [DPL] + [BG25 p.25] Extrabold */
+  h2 { font-size: 24px; line-height: 1.3;  font-weight: 700; margin-bottom: 20px; } /* [DPL] */
+  h3 { font-size: 18px; line-height: 1.3;  font-weight: 700; margin-bottom: 20px; } /* [DPL] */
+
+  @media (max-width: 600px) {               /* [DPL] breakpoint */
+    h1 { font-size: 24px; line-height: 1.15; margin-bottom: 10px; }
+  }
+
+  a { color: var(--color-pat-digital-link); }   /* [DS20 p.8] link blue #147CBD; [DPL] a{} */
+}
+
+/* ----------------------------------------------------------------------------
+   BRAND COMPONENT PRIMITIVES
+   Reproduce the two elements the Brand Guide specifies pixel-exactly.
+   ---------------------------------------------------------------------------- */
+@layer components {
+  /* [BG25 p.57] Buttons: rounded box, sentence case CTA, sky blue default,
+     height 46px, width = type width + 30px padding L/R, radius 5px,
+     Proxima Nova Semibold 15px, 0 tracking, centered, white text.
+     "Other colors from the Patterson palette are permitted, as long as the
+     button stands out in the context of the design." */
+  .pat-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 46px;
+    padding-inline: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-pat-sky);
+    color: var(--color-pat-white);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 1.15;
+    text-align: center;
+    text-decoration: none;
+    text-transform: none;                   /* never all caps [BG25 p.57] */
+  }
+  /* [DS20 p.15] Secondary buttons: navy outline, navy copy. */
+  .pat-button--secondary {
+    background-color: var(--color-pat-white);
+    border: 1px solid var(--color-pat-navy);
+    color: var(--color-pat-navy);
+  }
+  /* [DS20 p.15] Tertiary textlinks: link blue on light, sky blue on navy. */
+  .pat-textlink {
+    background: none;
+    border: none;
+    border-radius: 0;
+    padding: 10px 0;                        /* [DPL] .button--tertiary */
+    color: var(--color-pat-digital-link);
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .dark .pat-textlink { color: var(--color-pat-digital-sky); }  /* [DS20 p.15] */
+  /* [DS20 p.15] Inactive buttons: light grey. [DPL] .button[disabled] #A8A9AC. */
+  .pat-button[disabled] {
+    background-color: var(--color-pat-field-border);
+    cursor: not-allowed;
+  }
+
+  /* [DS20 p.16] Eyebrows: small type on Parent patterns, sentence case, short.
+     "Currently all eyebrows are teal." [DPL] .eyebrow 15px/19px, 700, #00817D.
+     NOTE: eyebrows are sentence case, NOT uppercase. */
+  .pat-eyebrow {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 19px;
+    color: var(--color-pat-teal);
+    text-transform: none;
+  }
+}
