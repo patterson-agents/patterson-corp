@@ -1,9 +1,8 @@
 <div align="center">
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/patterson-logo-white.svg">
-  <img src="docs/assets/patterson-logo-navy.svg" alt="Patterson Companies" width="260">
-</picture>
+<img src="docs/assets/banner.svg" width="100%" alt="Patterson Corp — Patterson Companies">
+
+<img src="docs/assets/patterson-logo-square-navy.svg" width="56" alt="Patterson Companies">
 
 # patterson-corp
 
@@ -12,7 +11,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 
 ![plugins](https://img.shields.io/badge/plugins-2-00A8E1?labelColor=003767)
 ![skills](https://img.shields.io/badge/skills-12-003767)
-![size](https://img.shields.io/badge/tracked-1069_KB-147EC2)
+![size](https://img.shields.io/badge/tracked-1077_KB-147EC2)
 ![runtime](https://img.shields.io/badge/scripts-TypeScript_·_no_build_step-00817D)
 ![deps](https://img.shields.io/badge/dependencies-none-58585B)
 ![gate](https://img.shields.io/badge/gate-verify--all.sh-58585B)
@@ -194,6 +193,7 @@ for t in $(find . -name run-tests.sh); do sh "$t"; done
 | File | Purpose |
 |---|---|
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | The OpenSpec proposal workflow, repository conventions, and the test-first requirement |
+| [`REFERENCES.md`](REFERENCES.md) | Index of authoritative sources — ServiceNow standards, the Brand Guide 2025, and vendor documentation — linking to each skill's own `REFERENCES.md` |
 | [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Contributor Covenant, adapted for a B2B engineering context |
 | [`SECURITY.md`](SECURITY.md) | Private vulnerability reporting; no invented SLA |
 | [`CODEOWNERS`](CODEOWNERS) | A reviewing team for every top-level path (placeholder handles pending real assignment) |
