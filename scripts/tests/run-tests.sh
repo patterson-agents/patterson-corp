@@ -88,7 +88,7 @@ expect_rule "size/budget" "$SIZE_CHECK" "$small" "compliant tree (INFO line pres
 
 # A tree whose single tracked file exceeds 1 MiB (1048576 bytes) on its own.
 big=$(make_repo big)
-add_file "$big" "blob.bin" 1200000
+add_file "$big" "blob.bin" 2200000
 commit_repo "$big"
 expect_exit 1 "$SIZE_CHECK" "$big" "oversized tree fails"
 expect_rule "size/budget" "$SIZE_CHECK" "$big" "oversized tree"

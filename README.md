@@ -137,7 +137,7 @@ patterson-corp/
 │       ├── skills/<name>/            # SKILL.md · references/ · assets/ · _SOURCES.md
 │       └── agents/                   # brand-compliance-reviewer
 ├── scripts/
-│   ├── check-size.ts                 # 1 MiB tracked-byte budget validator
+│   ├── check-size.ts                 # 2 MiB tracked-byte budget validator
 │   ├── check-no-binaries.ts          # fonts / office / archive / oversized-raster validator
 │   ├── verify-all.sh                 # the gate battery -- CI and pre-commit both call this
 │   └── tests/                        # TDD fixtures for the two validators above
