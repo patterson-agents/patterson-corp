@@ -173,13 +173,18 @@ fi
 
 # ---------------------------------------------------------------------------
 # 7. No node:20 in yml/json/md -- scoped to the repository's shipped surface (plugins/,
-#    .github/, .githooks/, .devcontainer/, scripts/, docs/, and root policy files).
+#    .github/, .githooks/, .devcontainer/, scripts/, docs/, root policy files, and any
+#    root-level *.yml/*.yaml/*.json config file such as .pre-commit-config.yaml). The
+#    ':(glob)*.ext' pathspecs match only files directly at the repo root -- '*' does not
+#    cross '/' in glob-magic mode -- so they add exactly that root-level surface without
+#    re-widening into openspec/ or any nested directory not already covered above.
 #    openspec/ is excluded deliberately: its change proposals are read-only planning prose
 #    that *describes* this very rule ("SHALL NOT reference node:20") and therefore contains
 #    the literal string as a quotation, not a violation.
 # ---------------------------------------------------------------------------
 node20_hits=$(git ls-files \
     -- 'plugins' '.github' '.githooks' '.devcontainer' 'scripts' 'docs' '*.md' \
+       ':(glob)*.yml' ':(glob)*.yaml' ':(glob)*.json' \
     | grep -v '^openspec/' \
     | grep -E '\.(yml|yaml|json|md)$' \
     | while IFS= read -r f; do grep -l 'node:20' "$f" 2>/dev/null; done || true)
