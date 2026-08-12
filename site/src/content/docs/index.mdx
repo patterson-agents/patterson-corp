@@ -1,65 +1,97 @@
 ---
-title: Patterson Docs
-description: Documentation, guides, and reference for teams building on the Patterson Companies design system.
+title: The enterprise agent catalog
+description: The enterprise catalog of the Patterson agent platform. Engineering standards and brand identity, encoded as installable agent plugins.
 template: splash
 hero:
-  tagline: Trusted Expertise. Unrivaled Support.
+  title: Patterson Corp
+  tagline: Patterson's institutional knowledge, encoded as installable agent plugins.
   image:
     alt: Patterson Companies
     dark: ../../assets/patterson-logo-white.svg
     light: ../../assets/patterson-logo-navy.svg
   actions:
-    - text: Get started
-      link: /getting-started/
+    - text: Browse the catalog
+      link: /plugins/
       icon: right-arrow
       variant: primary
-    - text: Brand tokens
-      link: /guides/brand-tokens/
+    - text: Read the architecture
+      link: /architecture/
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## A documentation foundation in the Patterson brand
+## Trusted expertise. Unrivaled support.
 
-This starter pairs [Starlight](https://starlight.astro.build), Astro's documentation
-framework, with the Patterson Companies design system. You write Markdown. The navy
-chrome, the accent policy, Proxima Nova, the 5px shape language, and the sky focus
-ring come with it.
+This is the enterprise catalog of the Patterson agent platform. It holds the capability that is
+true for **all** of Patterson — engineering standards and brand identity — as two independently
+installable plugins.
+
+The organizing intent is that an agent working on Patterson code behaves the way a well-oriented
+Patterson colleague would: aware of the standards that apply, able to cite them, and able to say
+when a standard does not cover the situation at hand.
+
+<ul class="pat-stats">
+  <li><span class="pat-stat-figure">2</span><span class="pat-stat-label">plugins, installed independently</span></li>
+  <li><span class="pat-stat-figure">12</span><span class="pat-stat-label">skills, every claim traced to a source</span></li>
+  <li><span class="pat-stat-figure">9</span><span class="pat-stat-label">capability specifications on record</span></li>
+  <li><span class="pat-stat-figure">2</span><span class="pat-stat-label">compliance reviewers you can delegate to</span></li>
+</ul>
+
+## Install it
+
+```bash
+# inside Claude Code
+/plugin marketplace add patterson-agents/patterson-corp
+/plugin install patterson-engineering@patterson-corp
+/plugin install patterson-brand@patterson-corp
+```
+
+Then use it three ways:
+
+```text
+"does this pipeline meet our standards?"        ← skill fires automatically
+"drop the Patterson theme into this project"    ← design-tokens installs theme.css
+"review this page for brand compliance"         ← delegates to the reviewer subagent
+```
+
+The same catalog is consumed by VS Code and GitHub Copilot, which read the same
+`extraKnownMarketplaces` and `enabledPlugins` keys and defer to the same manifest schema.
 
 <CardGrid stagger>
-  <Card title="On brand by default">
-    Every Patterson token is mapped onto Starlight's theme variables in one file,
-    `src/styles/patterson.css`. Nothing is ejected, so the theme survives Starlight
-    upgrades.
+  <Card title="Standards that cite themselves">
+    Patterson's IT standards for delivery, infrastructure, data and operations — each with the
+    ServiceNow record it came from, executable validators, and a compliance-reviewer subagent.
+    [Read patterson-engineering](/plugins/patterson-engineering/)
   </Card>
-  <Card title="Pinned and verified">
-    Astro 7.1.5 and Starlight 0.41.5, pinned exactly and install-verified. The image
-    pipeline runs on Astro's passthrough service, so no image library is ever loaded
-    at build time.
+  <Card title="Brand identity as tokens">
+    The palette and each color's role, Proxima Nova typography, the sentence-case rule, and a
+    drop-in Tailwind v4 and shadcn/ui theme generated from tokens.
+    [Read patterson-brand](/plugins/patterson-brand/)
   </Card>
-  <Card title="Diataxis structure">
-    Start here, Guides, and Reference are wired into the sidebar. Guides and Reference
-    autogenerate, so a new file shows up without a config change.
+  <Card title="Specified before it is built">
+    Every substantive change is proposed and specified before any code is written, then folded
+    into the capability specification it satisfies.
+    [Read the specifications](/specifications/)
   </Card>
-  <Card title="Light and dark">
-    Both themes are tuned. Navy and link blue carry the accent on white; sky carries
-    it on dark. Sky is never text on a light canvas.
+  <Card title="Silence is recorded, not filled">
+    Where a Patterson source is silent, the gap is written down and escalated rather than
+    resolved locally. The platform never manufactures policy.
+    [Read the provenance](/provenance/)
   </Card>
 </CardGrid>
 
-## Run it
+## What is underneath
 
-```sh
-bun install
-bun run dev
-```
+`patterson-corp` is the **enterprise** layer of a six-layer model. Lower layers extend it by
+default and may override it when they know better — divergence is treated as information about
+where a standard is incomplete, not as a violation to suppress.
 
-The site builds to `dist/` with `bun run build`, and `bun run preview` serves that
-build locally.
+Nothing in that model is enforced on a developer machine today. The layer configuration
+demonstrates the shape of ownership; the enforcement switches are documented and deliberately
+left off. [The six-layer model](/architecture/six-layer-model/) explains why, and
+[the diagrams](/architecture/diagrams/) show it.
 
-## Where to go next
-
-Read [Getting started](/getting-started/) to add your first page. [Brand tokens](/guides/brand-tokens/)
-covers the palette and shape rules. [Theming](/guides/theming/) explains how the
-Starlight mapping works and where to change it.
+Every page under Plugins, Decisions, Specifications and Governance is generated from a Markdown
+file in the repository and links back to it. The repository is the source of truth; this site is
+a reading surface for it.

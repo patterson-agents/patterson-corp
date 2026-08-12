@@ -1,101 +1,95 @@
-# Patterson Starlight site
+# corp.patterson.sh
 
-A Patterson Companies branded [Starlight](https://starlight.astro.build) documentation
-site. Astro 7.1.5 and Starlight 0.41.5, pinned exactly and install-verified.
+The documentation site for `patterson-corp`, built with [Starlight](https://starlight.astro.build)
+on Astro. Deployed to <https://corp.patterson.sh> by `.github/workflows/pages.yml`.
 
-## Scaffold
+This directory is the **one documented exception** to the platform's zero-dependency rule. It
+carries `astro@7.1.5` and `@astrojs/starlight@0.41.5`, pinned without a caret, plus a committed
+`bun.lock`. Everything outside `site/` remains zero-dependency TypeScript run directly by Node.
+See [`docs/decisions/0005-branded-doc-sites.md`](../docs/decisions/0005-branded-doc-sites.md).
 
-```sh
-bun create patterson-starlight my-docs
-cd my-docs
-bun run dev
-```
+## Almost every page here is generated
 
-`bun create` copies this directory into the target, runs `bun install`, and initializes
-a git repository there. Three caveats, verified against Bun 1.3:
-
-- **Point it at a new directory.** `bun create` does not refuse an existing one — it
-  replaces the contents, without a prompt. A file already sitting in the target is
-  gone afterward.
-- **The `name` field is rewritten** to the target directory name, so the scaffolded
-  project is `my-docs`, not `patterson-starlight-site`. Everything else is copied
-  verbatim, `.gitignore` included.
-- **The template is resolved from `~/.bun-create/patterson-starlight`.** If that copy
-  is missing, `bun create` falls back to looking the name up on npm, where it does not
-  exist. Register it once with
-  `cp -R <plugin>/ds/templates/starlight ~/.bun-create/patterson-starlight`.
-
-If you would rather not register anything, copy the folder directly:
+The Markdown under `plugins/`, `docs/`, `openspec/` and the root governance files is the source of
+truth. `scripts/build-site-content.ts` derives the site's pages from it — it does not fork prose.
+Each generated page carries the file it came from, both as an HTML comment and as the page's
+"Edit page" link.
 
 ```sh
-cp -R "${CLAUDE_PLUGIN_ROOT}/ds/templates/starlight" my-docs
-cd my-docs
-bun install
-bun run dev
+node ../scripts/build-site-content.ts   # or: bun run content
 ```
 
-## Scripts
+The generated trees are **not tracked** (see the repository's `.gitignore`), so tracked bytes stay
+flat as the catalog grows and a page can never drift from its source. The generator removes and
+rebuilds every directory it owns on each run, so a renamed or deleted source cannot leave a stale
+page behind.
 
-| Script | What it does |
+| Section | Generated from |
 |---|---|
-| `bun run dev` | Dev server on `http://localhost:4321` |
-| `bun run build` | Static build to `dist/` |
-| `bun run preview` | Serves the built `dist/` locally |
+| `architecture/` | `docs/architecture/*.md`, split on its own section boundaries, plus a diagrams page inlining `docs/diagrams/*.svg` |
+| `plugins/` | each plugin's `README.md`, each skill's `SKILL.md`, and every file in that skill's `references/` |
+| `decisions/` | `docs/decisions/*.md` |
+| `specifications/` | `openspec/specs/**/spec.md`, grouped by capability area |
+| `governance/` | `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `AGENTS.md` |
+| `provenance.md` | every skill's `_SOURCES.md` and `REFERENCES.md`, plus a live `[TBD]` count |
 
-There is deliberately no `start` script. `bun create` executes a template's `start`
-script when one exists, and a dev server that never exits would hang the scaffold.
+`src/content/docs/index.mdx` is the only hand-authored page.
 
-## Customization points
+## Commands
 
-| What | Where |
-|---|---|
-| Site title, description, tagline | `astro.config.mjs`, inside `starlight({ … })` |
-| Deployed origin and sub-path | `astro.config.mjs`, the commented `site` and `base` fields |
-| Sidebar sections | `astro.config.mjs`, `sidebar` — `guides/` and `reference/` autogenerate |
-| Brand theme | `src/styles/patterson.css`, the only brand file |
-| Logos | `src/assets/` for the hero, `public/` for the nav and favicon |
-| Pages | `src/content/docs/`, folders drive the sidebar |
+```sh
+bun install          # once
+bun run content      # regenerate the derived pages
+bun run dev          # regenerates content, then serves with hot reload
+bun run build        # astro build -> dist/  (run `bun run content` first)
+bun run preview      # serve the built dist/
+```
 
-## The accent and contrast policy
+`bun run build` deliberately does **not** run the generator. CI runs the two steps separately so a
+content failure is distinguishable from a build failure, and so the same generated tree is built
+once rather than twice.
 
-Sky `#00A8E1` is the brand's signature color and the easiest one to misuse. White text
-on sky fails WCAG contrast, and so does sky text on white.
+> [!IMPORTANT]
+> The sidebar autogenerates from the directories the generator writes. Running `astro build`
+> without generating content first fails loudly rather than publishing a half-empty site.
 
-- On a **light** canvas, navy `#003767` carries strong text and link blue `#147EC2`
-  carries links. Sky appears only as non-text chrome, such as the header hairline and
-  the focus ring.
-- On a **dark** canvas, sky and its lighter tints carry the accent, text included.
+## The deployed artifact is composed
 
-Primary button hover on light is a lighter navy `#315D83`, never sky. Everything is
-sentence case, with no uppercase transforms, and there is no emoji anywhere.
+`site/dist` is not deployed on its own. `pages.yml` composes it with the repository's pre-existing
+`docs/` tree so that every URL that resolved before this site existed still resolves:
 
-## The font policy
+- `site/dist` becomes the site root
+- `docs/` is copied to `/docs/`
+- each subdirectory of `docs/` is also copied to its original root-level path — `/assets/`,
+  `/diagrams/`, `/architecture/`, `/decisions/`
 
-Proxima Nova is served by Adobe Fonts kit `uth1qfm`, linked from the `head` entry in
-`astro.config.mjs`. Adobe's terms do not permit re-hosting Typekit payloads, so this
-template ships no font binaries and no `@font-face` declarations. Arial is the
-sanctioned substitute when the kit is unreachable.
+The one path whose content intentionally changes is `/`, which now serves this site instead of the
+previous hand-authored page. That page is still published, at `/docs/`.
+
+## Brand rules that apply here
+
+- **Sentence case everywhere.** No uppercase transforms, in content or in CSS. The repository gate
+  fails on a `text-transform` set to all caps.
+- **No emoji.** This is a business-to-business healthcare distribution brand.
+- **Fonts come from the Adobe Fonts kit only.** Proxima Nova loads from kit `uth1qfm`, linked from
+  the `head` entry in `astro.config.mjs`. Never self-host it and never add an `@font-face` rule for
+  it — Adobe's terms do not permit re-hosting Typekit payloads. Arial is the sanctioned substitute.
+- **Accent policy.** On light, navy `#003767` carries strong text and link blue `#147EC2` carries
+  links; sky `#00A8E1` appears only as non-text chrome. On dark, sky and its tints carry the
+  accent. Accent colors never carry body copy or legal text.
+- `src/styles/patterson.css` is the brand file and maps Patterson tokens onto Starlight's `--sl-*`
+  variables. `src/styles/site.css` adds only what is specific to this site: the inlined diagrams
+  and the splash proof points.
 
 ## Dependencies
 
-`astro@7.1.5` and `@astrojs/starlight@0.41.5`, pinned without a caret, are the only two
-direct dependencies. Adding one to this template means supply-chain scoring it first.
+`astro` and `@astrojs/starlight` are the only two direct dependencies, both pinned exactly and both
+supply-chain scored in ADR 0005. Adding a third means scoring it with
+`socket package shallow npm pkg:npm/<name>@<version> --markdown` first and surfacing anything below
+90 before it lands.
 
-### About sharp
-
-`astro@7.1.5` declares `sharp` as an **optional** dependency, and package managers
-install optional dependencies by default — so `sharp@0.35.3` does appear in `bun.lock`
-and in `node_modules` after `bun install`. It is never loaded. `astro.config.mjs`
-configures `passthroughImageService()`, which copies images through untouched instead of
-invoking sharp, and the build log confirms it: images come out byte-for-byte the size
-they went in.
-
-This is a deliberate, documented position, not an oversight. Do not add `sharp` as a
-direct dependency, and do not swap the image service back to the default. If you need
-resizing or format conversion, pre-process the assets before committing them.
-
-**Do not reach for `bun install --omit=optional` to drop it.** That flag does remove
-`sharp`, but it also removes Rolldown's native binding, which Astro 7 needs to bundle —
-the build then fails with `Cannot find native binding`. Verified on Bun 1.3.14. Leaving
-the optional dependencies installed and the image service on passthrough is the working
-configuration.
+The image pipeline uses Astro's `passthroughImageService()` rather than the default sharp-backed
+service. Astro still declares `sharp` as an *optional* dependency, so it appears in `bun.lock` and
+in `node_modules`; it is never loaded. Do not add it directly, do not switch the image service
+back, and do not run `bun install --omit=optional` — that strips Rolldown's native binding along
+with sharp and breaks the build.

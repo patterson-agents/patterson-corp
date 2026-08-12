@@ -11,6 +11,8 @@ site/dist/
 # and the root governance files). The sources are tracked; these copies are not, so tracked
 # bytes stay flat as the catalog grows. CI regenerates them before `bun run build`; run
 # `node scripts/build-site-content.ts` locally before `bun run dev`.
+site/public/assets/
+site/public/diagrams/
 site/src/content/docs/architecture/
 site/src/content/docs/plugins/
 site/src/content/docs/decisions/

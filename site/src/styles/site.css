@@ -1,0 +1,96 @@
+/* ============================================================
+   corp.patterson.sh — site-specific styles
+   ------------------------------------------------------------
+   Everything brand-level lives in `patterson.css`, which is the
+   only file that maps Patterson tokens onto Starlight's `--sl-*`
+   variables. This file adds the two things that are specific to
+   this site rather than to the brand: the inlined architecture
+   diagrams, and the proof-point row on the splash page.
+
+   It reuses the `--pat-*` tokens defined in `patterson.css` and
+   introduces no new color values. Sentence case throughout; no
+   uppercase transforms anywhere [BG25 p.25].
+   ============================================================ */
+
+/* --- Inlined architecture diagrams ------------------------ */
+/* Each figure carries its own id, and the generator scopes that
+   SVG's internal <style> rules under it. The three diagrams reuse
+   class names (`.hd`, `.ln`) with different declarations, and an
+   SVG <style> inlined into a page is document-wide, so the
+   scoping is load-bearing rather than cosmetic. */
+.pat-diagram {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: var(--pat-radius, 5px);
+  background: var(--pat-white, #ffffff);
+  overflow-x: auto;
+}
+
+.pat-diagram svg {
+  display: block;
+  width: 100%;
+  min-width: 34rem;
+  height: auto;
+}
+
+.pat-diagram figcaption {
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sl-color-gray-6, var(--sl-color-gray-5));
+  color: var(--sl-color-gray-3);
+  font-size: var(--sl-text-xs);
+  line-height: 1.5;
+}
+
+/* The diagrams are drawn for a light canvas: navy and sky fills
+   with dark text. On dark they keep their own white ground rather
+   than inverting, which would break the brand color relationships
+   the diagrams are illustrating. */
+:root[data-theme='dark'] .pat-diagram {
+  border-color: var(--pat-navy-80, #335f85);
+  background: var(--pat-white, #ffffff);
+}
+
+/* --- Splash proof points ---------------------------------- */
+/* Numbers as proof points, in place of the README's badge row. */
+.pat-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 1rem;
+  margin: 2rem 0 2.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.pat-stats li {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--sl-color-gray-5);
+  border-radius: var(--pat-radius, 5px);
+  background: var(--sl-color-bg-nav, transparent);
+}
+
+.pat-stats .pat-stat-figure {
+  display: block;
+  color: var(--pat-sky, #00a8e1);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+/* Sky is never text on a light canvas [BG25 accent policy], so the
+   light theme carries the figure in link blue and reserves sky for
+   the dark canvas, where it is the accent. */
+:root[data-theme='light'] .pat-stats .pat-stat-figure {
+  color: var(--pat-blue, #147ec2);
+}
+
+.pat-stats .pat-stat-label {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--sl-color-gray-2);
+  font-size: var(--sl-text-sm);
+  line-height: 1.4;
+}
