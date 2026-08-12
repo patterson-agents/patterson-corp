@@ -31,7 +31,7 @@ echo "root: $ROOT"
 # ---------------------------------------------------------------------------
 suite_count=0
 suite_fail=0
-for suite in $(find . -path ./.git -prune -o -name 'run-tests.sh' -print | sort); do
+for suite in $(find . -path ./.git -prune -o -name node_modules -prune -o -path ./site/dist -prune -o -path ./.astro -prune -o -name 'run-tests.sh' -print | sort); do
   suite_count=$((suite_count + 1))
   echo "--- suite: $suite ---"
   if sh "$suite"; then
@@ -119,7 +119,7 @@ is_kit_name_allowlisted() {
 }
 
 forbidden_hits=0
-for f in $(git ls-files | grep -v '\.md$'); do
+for f in $(git ls-files | grep -v '\.md$' | grep -v '\.lock$' | grep -v 'bun\.lock'); do
   fpath="./$f"
   if is_kit_name_allowlisted "$fpath"; then
     pattern="$FONT_AND_COLOR_PATTERN"
