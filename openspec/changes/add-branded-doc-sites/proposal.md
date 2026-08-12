@@ -30,10 +30,6 @@ wording down to what is actually still true.
 - **`.github/dependabot.yml`** gains an `npm` ecosystem entry scoped to `/site` (weekly, grouped)
   alongside the existing `github-actions` entry, so `patterson-corp`'s own future `site/` carries
   dependency update coverage from day one.
-- This change does **not** scaffold `site/` itself in any of the six repositories, does not add the
-  `astro`/`@astrojs/starlight` dependencies, and does not touch `scripts/verify-all.sh`'s scan
-  exclusions -- those are implementation work for the per-repository site-build workstreams and the
-  parallel gate-hardening change, tracked separately in `tasks.md`.
 
 ## Capabilities
 
@@ -49,6 +45,21 @@ None. This change does not alter any existing capability's requirements; `repo-s
 README/devcontainer/tests baseline is unaffected, and the wording corrections in `copilot-instructions.md`,
 `copilot-setup-steps.yml`, and the issue templates are documentation accuracy fixes, not a change to a
 documented requirement's behavior.
+
+## Non-goals
+
+- **No `site/` scaffolding.** This change does not create `site/` or add the `astro` /
+  `@astrojs/starlight` dependencies in `patterson-corp` or in any of the six site repositories --
+  it is the spec and governance layer those per-repository workstreams build against, tracked
+  separately as follow-on work in `tasks.md`.
+- **No `scripts/verify-all.sh` edits.** Excluding `site/`'s lockfile and `node_modules` from the
+  no-binaries, size-budget, and forbidden-content scans is the parallel gate-hardening change's
+  work, not this one's. This proposal's `sites/branded-docs` spec states the requirement; it does
+  not implement the exclusion.
+- **No visual design, navigation, or content-migration decisions** for any of the six sites. Those
+  belong to whichever workstream actually builds a given repository's `site/`.
+- **No change to any existing capability's requirements.** `repo-standard/quality-baseline` and
+  every other spec under `openspec/specs/` are unmodified by this proposal.
 
 ## Impact
 
