@@ -20,7 +20,7 @@
       "author": {
         "name": "Patterson Infra CloudOps"
       },
-      "license": "UNLICENSED",
+      "license": "LicenseRef-Patterson-Internal",
       "category": "engineering",
       "keywords": [
         "standards",
@@ -57,7 +57,7 @@
       "author": {
         "name": "Patterson Corporate Marketing & Communications"
       },
-      "license": "UNLICENSED",
+      "license": "LicenseRef-Patterson-Internal",
       "category": "design",
       "keywords": [
         "brand",

@@ -7,7 +7,7 @@
   },
   "homepage": "https://github.com/patterson-agents/patterson-corp/tree/main/plugins/patterson-engineering",
   "repository": "https://github.com/patterson-agents/patterson-corp",
-  "license": "UNLICENSED",
+  "license": "LicenseRef-Patterson-Internal",
   "keywords": [
     "standards",
     "compliance",
