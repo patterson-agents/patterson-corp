@@ -10,6 +10,9 @@ on:
       - .claude-plugin/marketplace.json
       - .github/plugin/marketplace.json
 
+permissions:
+  contents: read
+
 jobs:
   check-manifest-sync:
     runs-on: ubuntu-latest
