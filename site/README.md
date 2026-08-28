@@ -1,7 +1,7 @@
 # corp.patterson.sh
 
-The documentation site for `patterson-corp`, built with [Starlight](https://starlight.astro.build)
-on Astro. Deployed to <https://corp.patterson.sh> by `.github/workflows/pages.yml`.
+The documentation site for `patterson-enterprise-plugins`, built with
+[Starlight](https://starlight.astro.build) on Astro. Deployed to <https://corp.patterson.sh> by `.github/workflows/pages.yml`.
 
 This directory is the **one documented exception** to the platform's zero-dependency rule. It
 carries `astro@7.1.5` and `@astrojs/starlight@0.41.5`, pinned without a caret, plus a committed

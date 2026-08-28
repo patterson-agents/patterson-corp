@@ -20,7 +20,7 @@ so that alphabetical merge order matches the intended organisational precedence.
 #### Scenario: Layer contents match their tier
 
 - **WHEN** each layer is inspected
-- **THEN** `10-enterprise.json` declares `extraKnownMarketplaces` referencing `patterson-corp`
+- **THEN** `10-enterprise.json` declares `extraKnownMarketplaces` referencing `patterson-enterprise-plugins`
 - **AND** `20-suborg.json` adds `patterson-dental` and `patterson-vet`
 - **AND** `30-department.json` declares `enabledPlugins` for the engineering and brand plugins
 - **AND** `40-team.json` demonstrates extending an inherited value and overriding one

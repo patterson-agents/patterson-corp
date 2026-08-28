@@ -21,7 +21,7 @@ export default defineConfig({
 
   integrations: [
     starlight({
-      title: 'Patterson Corp',
+      title: 'Patterson Enterprise Plugins',
       description:
         "The enterprise catalog of the Patterson agent platform: Patterson's institutional knowledge, encoded as installable agent plugins.",
       tagline: 'Trusted Expertise. Unrivaled Support.',
@@ -36,7 +36,7 @@ export default defineConfig({
       // the repository and carries its own `editUrl` frontmatter pointing at that
       // source. This base covers the few pages authored in `site/` itself.
       editLink: {
-        baseUrl: 'https://github.com/patterson-agents/patterson-corp/edit/main/site/',
+        baseUrl: 'https://github.com/patterson-agents/patterson-enterprise-plugins/edit/main/site/',
       },
       // Proxima Nova is served by Adobe Fonts kit uth1qfm. Load it from the kit
       // only — Adobe's terms do not permit re-hosting Typekit payloads, so never

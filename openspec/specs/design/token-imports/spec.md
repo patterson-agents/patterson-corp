@@ -9,7 +9,7 @@ Guide are resolved and recorded, and what happens when source content cannot be 
 
 Each imported design project SHALL be extracted to a `DESIGN.md`, a `theme.css`, and a
 `tokens.json`, following the shape of
-`patterson-corp/plugins/patterson-brand/skills/design-tokens/`.
+`patterson-enterprise-plugins/plugins/patterson-brand/skills/design-tokens/`.
 
 #### Scenario: DESIGN.md shape
 
@@ -106,7 +106,7 @@ declare either the imported design systems or the existing one authoritative.
 #### Scenario: Deciding where the extractions live
 
 - **WHEN** the extraction is placed
-- **THEN** it lands under `patterson-labs`, not `patterson-corp`
+- **THEN** it lands under `patterson-labs`, not `patterson-enterprise-plugins`
 - **AND** the placement is recorded as a default pending Daniel's ruling on which design system
   supersedes which
 - **AND** the existing `patterson-brand` design-tokens skill is left unmodified

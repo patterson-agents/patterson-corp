@@ -1,5 +1,5 @@
 {
-  "name": "patterson-corp",
+  "name": "patterson-enterprise-plugins",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
   "features": {},
   "customizations": {

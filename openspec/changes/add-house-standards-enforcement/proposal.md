@@ -82,5 +82,5 @@ enforcing.
 - `plugins/patterson-engineering/.claude-plugin/plugin.json`,
   `.claude-plugin/marketplace.json`, `.github/plugin/marketplace.json` (via
   `sync-manifests.sh`).
-- Consumers: any repo enabling `patterson-engineering@patterson-corp` picks up the new guard
+- Consumers: any repo enabling `patterson-engineering@patterson-enterprise-plugins` picks up the new guard
   on its next plugin update once this lands on `main`.

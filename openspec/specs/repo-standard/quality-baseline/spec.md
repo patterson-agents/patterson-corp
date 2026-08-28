@@ -92,8 +92,8 @@ gh-aw creation prompt, compiled with `gh aw compile`, and committed as the workf
 #### Scenario: Workflow purposes are fitted to their repository
 
 - **WHEN** the set of authored workflows is reviewed
-- **THEN** `patterson-corp` has a nightly marketplace-doctor that validates manifests, runs all skill
-  suites, and creates an issue on failure
+- **THEN** `patterson-enterprise-plugins` has a nightly marketplace-doctor that validates manifests,
+  runs all skill suites, and creates an issue on failure
 - **AND** `patterson-labs` has a weekly incubation review against `docs/promotion-path.md`
 - **AND** `patterson-dental` and `patterson-vet` each have a repo-ask slash-command workflow
 - **AND** `patterson-platform-docs` has a weekly reference-library chronicle and link audit

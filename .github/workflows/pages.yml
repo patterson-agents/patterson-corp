@@ -90,7 +90,7 @@ jobs:
             _site/docs/index.html \
             _site/docs/diagrams/layered-model.svg \
             _site/diagrams/layered-model.svg \
-            _site/assets/banner.webp \
+            _site/assets/banner.svg \
             _site/architecture/layered-settings.md
           do
             if [ ! -f "$page" ]; then

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
-  "name": "patterson-corp",
+  "name": "patterson-enterprise-plugins",
   "description": "Patterson Companies enterprise agent plugins. The top layer of the Patterson agent platform: standards, brand, and shared capability that applies across every sub-organization.",
   "version": "0.1.0",
   "owner": {

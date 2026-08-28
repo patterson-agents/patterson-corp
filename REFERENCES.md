@@ -1,4 +1,4 @@
-# References — patterson-corp
+# References — patterson-enterprise-plugins
 
 Authoritative sources for what this repository's plugins assert. This file is an **index**,
 not a duplicate — the full clause text, `sys_kb_id` citations, and confidence notes live beside

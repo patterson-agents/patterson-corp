@@ -1,6 +1,6 @@
 # AGENTS.md
 
-`patterson-corp` is a Claude Code / Copilot **plugin marketplace**, not an application.
+`patterson-enterprise-plugins` is a Claude Code / Copilot **plugin marketplace**, not an application.
 Everything shipped lives under `plugins/`; everything else is governance, validators, planning
 prose, or the documentation site.
 

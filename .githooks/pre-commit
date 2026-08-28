@@ -1,5 +1,5 @@
 #!/bin/sh
-# .githooks/pre-commit -- fast local gate for patterson-corp.
+# .githooks/pre-commit -- fast local gate for patterson-enterprise-plugins.
 #
 # Runs every skill/hook test suite under plugins/ and the design-tokens theme round-trip
 # before a commit is created. This is deliberately narrower than scripts/verify-all.sh (no

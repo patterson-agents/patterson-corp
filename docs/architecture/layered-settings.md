@@ -181,8 +181,9 @@ v2.1.169 or later).
 >
 > — `CC-marketplaces` § Marketplace schema > Required fields, the `name` row
 
-There is no scoping by owner, by org, or by source. `patterson-corp` is `patterson-corp` everywhere
-on the machine, and marketplace state is stored once per user in
+There is no scoping by owner, by org, or by source. `patterson-enterprise-plugins` is
+`patterson-enterprise-plugins` everywhere on the machine, and marketplace state is stored once per
+user in
 `~/.claude/plugins/known_marketplaces.json`, "not per project" (`CC-marketplaces` § Require
 marketplaces for your team).
 
@@ -190,7 +191,7 @@ marketplaces for your team).
 > **First-found-wins hazards.** Three of them are documented.
 >
 > 1. **Later layers silently replace earlier ones.** If a `50-` fragment declared
->    `extraKnownMarketplaces.patterson-corp` pointing at a fork, deep-merge would rewrite the
+>    `extraKnownMarketplaces.patterson-enterprise-plugins` pointing at a fork, deep-merge would rewrite the
 >    `source` and the enterprise catalog would quietly become the fork. Nothing warns.
 > 2. **A plugin seed outranks settings.** With `CLAUDE_CODE_PLUGIN_SEED_DIR` set, "marketplaces
 >    declared in the seed overwrite any matching entries in the user's configuration on each
@@ -204,7 +205,7 @@ marketplaces for your team).
 >    configuration) — that check protects hooks, not marketplace identity.
 
 The operational rule: **the `name` field in a marketplace manifest is a Patterson-wide identifier.**
-`patterson-corp`, `patterson-dental`, `patterson-vet`, and `patterson-labs` must each be claimed
+`patterson-enterprise-plugins`, `patterson-dental`, `patterson-vet`, and `patterson-labs` must each be claimed
 once, org-wide, and never reused for a fork or a mirror.
 
 ### 3. Copilot instruction precedence is inverted, and there is no enterprise tier
@@ -293,15 +294,15 @@ copying the block into the layer and deleting the leading `//` from each line.
 ### `10-enterprise.json` — enterprise
 
 **Owner:** Patterson Companies, corporate IT.
-**What it does:** registers the enterprise catalog `patterson-corp` from its GitHub repository, and
-states `autoUpdate` explicitly so that a lower layer has something concrete to override.
+**What it does:** registers the enterprise catalog `patterson-enterprise-plugins` from its GitHub
+repository, and states `autoUpdate` explicitly so that a lower layer has something concrete to override.
 
 ```json
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "extraKnownMarketplaces": {
-    "patterson-corp": {
-      "source": { "source": "github", "repo": "patterson-agents/patterson-corp" },
+    "patterson-enterprise-plugins": {
+      "source": { "source": "github", "repo": "patterson-agents/patterson-enterprise-plugins" },
       "autoUpdate": false
     }
   }
@@ -360,7 +361,7 @@ drafted here — Patterson's provider and licensing posture is not settled.
 
 **Owner:** the segment — Patterson Dental, Patterson Veterinary.
 **What it does:** adds the two sub-org catalogs alongside the enterprise one. It does not touch
-`patterson-corp`; deep-merge means both keys survive into the effective policy.
+`patterson-enterprise-plugins`; deep-merge means both keys survive into the effective policy.
 
 ```json
 {
@@ -404,14 +405,14 @@ threat is a fork registered under a name that collides with an official catalog.
 ### `30-department.json` — department
 
 **Owner:** the department — Engineering, Marketing, Infra CloudOps.
-**What it does:** turns on the two `patterson-corp` plugins for everyone in the department.
+**What it does:** turns on the two `patterson-enterprise-plugins` plugins for everyone in the department.
 
 ```json
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "enabledPlugins": {
-    "patterson-engineering@patterson-corp": true,
-    "patterson-brand@patterson-corp": true
+    "patterson-engineering@patterson-enterprise-plugins": true,
+    "patterson-brand@patterson-enterprise-plugins": true
   }
 }
 ```
@@ -477,8 +478,8 @@ with a new key, and overriding an inherited scalar.
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "extraKnownMarketplaces": {
-    "patterson-corp": {
-      "source": { "source": "github", "repo": "patterson-agents/patterson-corp" },
+    "patterson-enterprise-plugins": {
+      "source": { "source": "github", "repo": "patterson-agents/patterson-enterprise-plugins" },
       "autoUpdate": true
     },
     "patterson-labs": {
@@ -490,19 +491,19 @@ with a new key, and overriding an inherited scalar.
 
 | Half | Key | Mechanism | Result |
 |---|---|---|---|
-| **Extend** | `extraKnownMarketplaces.patterson-labs` | objects deep-merge | `patterson-labs` joins `patterson-corp`, `patterson-dental`, and `patterson-vet`. No earlier layer loses an entry. |
-| **Override** | `extraKnownMarketplaces.patterson-corp.autoUpdate` | later files override scalars | `10-enterprise.json` set `false`; `40` sorts after `10`; the effective value is `true`. |
+| **Extend** | `extraKnownMarketplaces.patterson-labs` | objects deep-merge | `patterson-labs` joins `patterson-enterprise-plugins`, `patterson-dental`, and `patterson-vet`. No earlier layer loses an entry. |
+| **Override** | `extraKnownMarketplaces.patterson-enterprise-plugins.autoUpdate` | later files override scalars | `10-enterprise.json` set `false`; `40` sorts after `10`; the effective value is `true`. |
 
 Both rules are from `CC-settings` § Settings files. The effective merged policy is:
 
 | Key | Value | Contributed by |
 |---|---|---|
-| `extraKnownMarketplaces.patterson-corp.source` | `patterson-agents/patterson-corp` | `10`, restated by `40` |
-| `extraKnownMarketplaces.patterson-corp.autoUpdate` | `true` | `40` overrides `10` |
+| `extraKnownMarketplaces.patterson-enterprise-plugins.source` | `patterson-agents/patterson-enterprise-plugins` | `10`, restated by `40` |
+| `extraKnownMarketplaces.patterson-enterprise-plugins.autoUpdate` | `true` | `40` overrides `10` |
 | `extraKnownMarketplaces.patterson-dental` | github source | `20` |
 | `extraKnownMarketplaces.patterson-vet` | github source | `20` |
 | `extraKnownMarketplaces.patterson-labs` | github source | `40` |
-| `enabledPlugins` | both `patterson-corp` plugins `true` | `30` |
+| `enabledPlugins` | both `patterson-enterprise-plugins` plugins `true` | `30` |
 
 `patterson-labs` is the incubation catalog named in this repository's README topology table, and
 `autoUpdate: true` makes Claude Code "refresh that marketplace and update its installed plugins in
@@ -511,8 +512,8 @@ team tracking incubating work to want, and a change that adds capability rather 
 
 > [!NOTE]
 > **Why the override repeats the full `source` block.** Deep-merge implies a fragment could carry
-> only `{"patterson-corp": {"autoUpdate": true}}` and inherit `source` from `10-enterprise.json`.
-> That would be a tighter demonstration, but it depends on merge running *before* per-file schema
+> only `{"patterson-enterprise-plugins": {"autoUpdate": true}}` and inherit `source` from
+> `10-enterprise.json`. That would be a tighter demonstration, but it depends on merge running *before* per-file schema
 > validation, and the documented behaviour is that a managed entry failing validation is stripped
 > with a warning (`CC-settings` § Invalid entries in managed settings). Whether a source-less
 > `extraKnownMarketplaces` entry survives that check is
@@ -521,7 +522,7 @@ team tracking incubating work to want, and a change that adds capability rather 
 
 > [!NOTE]
 > **Why the extend half uses `extraKnownMarketplaces` rather than `enabledPlugins`.** The obvious
-> team-tier extension is enabling one more plugin. Both plugins in `patterson-corp` are already
+> team-tier extension is enabling one more plugin. Both plugins in `patterson-enterprise-plugins` are already
 > enabled by `30-department.json`, and no plugin name in `patterson-labs`, `patterson-dental`, or
 > `patterson-vet` is sourced anywhere — those catalogs do not exist yet. Naming one would be an
 > invented settings value, so the extend half uses a marketplace registration instead. When the
@@ -534,7 +535,7 @@ team tracking incubating work to want, and a change that adds capability rather 
 
 ```jsonc
 // "enabledPlugins": {
-//   "patterson-brand@patterson-corp": false
+//   "patterson-brand@patterson-enterprise-plugins": false
 // }
 ```
 

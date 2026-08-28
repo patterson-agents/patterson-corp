@@ -1,5 +1,5 @@
 #!/bin/sh
-# verify-all.sh -- the single gate-battery entry point for patterson-corp.
+# verify-all.sh -- the single gate-battery entry point for patterson-enterprise-plugins.
 #
 # Runs every skill/hook test suite, the design-tokens theme round-trip, the
 # skill-name-equals-directory invariant, the forbidden-string greps, the no-binaries and
@@ -20,7 +20,7 @@ overall=0
 pass() { echo "PASS $1"; }
 fail() { echo "FAIL $1"; overall=1; }
 
-echo "== patterson-corp verify-all =="
+echo "== patterson-enterprise-plugins verify-all =="
 echo "root: $ROOT"
 
 # ---------------------------------------------------------------------------

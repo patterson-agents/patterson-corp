@@ -19,12 +19,12 @@ dependency, no Pages-artifact composition step, in any of them yet.
 - Keep the platform's zero-dependency invariant intact everywhere except the newly-scoped `site/`
   exception, and make the repository docs that assert it say so accurately.
 - Make sure a reader of `.github/copilot-instructions.md` or either issue template after this change
-  lands cannot conclude something false about `patterson-corp`'s dependency posture.
+  lands cannot conclude something false about `patterson-enterprise-plugins`'s dependency posture.
 
 **Non-Goals:**
 
-- Scaffolding `site/` in any of the six repositories, or in `patterson-corp` itself. This change is
-  the spec and the governance wording only.
+- Scaffolding `site/` in any of the six repositories, or in `patterson-enterprise-plugins` itself.
+  This change is the spec and the governance wording only.
 - Modifying `scripts/verify-all.sh`'s scan exclusions. That is the parallel gate-hardening change;
   this change's `sites/branded-docs` spec states the requirement (`site/` is excluded from the
   zero-dependency scans) without implementing the exclusion logic itself.
@@ -60,6 +60,6 @@ dependency, no Pages-artifact composition step, in any of them yet.
   keeping the correction narrow and explicit -- "plugin scripts are zero-dependency; the `site/`
   toolchain is the documented exception (ADR 0005)" -- in all four files, rather than deleting the
   zero-dependency claim outright.
-- **This change ships a spec with no implementation yet in `patterson-corp` itself.** Accepted: the
-  spec exists to be satisfied by the six per-repository workstreams, and `openspec validate` does not
+- **This change ships a spec with no implementation yet in `patterson-enterprise-plugins` itself.**
+  Accepted: the spec exists to be satisfied by the six per-repository workstreams, and `openspec validate` does not
   require a capability's requirements to already be met by code in the repository that defines them.
