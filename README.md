@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="docs/assets/banner.webp" width="100%" alt="Patterson Corp — Patterson Companies">
+<img src="docs/assets/banner.svg" width="100%" alt="Patterson Enterprise Plugins — Patterson Companies">
 
 <img src="docs/assets/patterson-logo-square-navy.webp" width="56" alt="Patterson Companies">
 
-# patterson-corp
+# patterson-enterprise-plugins
 
 **Trusted Expertise. Unrivaled Support.** — Patterson's institutional knowledge,
 encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-marketplaces).
@@ -25,6 +25,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 - [Live site](#live-site)
 - [What this is](#what-this-is)
 - [Quick start](#quick-start)
+  - [Migrating from `patterson-corp`](#migrating-from-patterson-corp)
 - [Plugin catalog](#plugin-catalog)
 - [Anatomy of a capability](#anatomy-of-a-capability)
 - [The layered model](#the-layered-model)
@@ -40,7 +41,7 @@ encoded as installable [agent plugins](https://code.claude.com/docs/en/plugin-ma
 **[corp.patterson.sh](https://corp.patterson.sh)** — the enterprise catalog of the Patterson
 agent platform: Patterson's institutional knowledge, encoded as installable agent plugins.
 
-<img src="docs/screenshots/site-home.webp" width="100%" alt="patterson-corp documentation site home page">
+<img src="docs/screenshots/site-home.webp" width="100%" alt="patterson-enterprise-plugins documentation site home page">
 
 ## What this is
 
@@ -58,18 +59,18 @@ See [PROJECT-CHARTER.md](../PROJECT-CHARTER.md) for goals and scope.
 
 ```bash
 # inside Claude Code
-/plugin marketplace add patterson-agents/patterson-corp
-/plugin install patterson-engineering@patterson-corp
-/plugin install patterson-brand@patterson-corp
+/plugin marketplace add patterson-agents/patterson-enterprise-plugins
+/plugin install patterson-engineering@patterson-enterprise-plugins
+/plugin install patterson-brand@patterson-enterprise-plugins
 ```
 
 From a local checkout:
 
 ```bash
-cd patterson-corp
+cd patterson-enterprise-plugins
 claude
 /plugin marketplace add .
-/plugin install patterson-brand@patterson-corp
+/plugin install patterson-brand@patterson-enterprise-plugins
 ```
 
 Then use it three ways:
@@ -84,6 +85,25 @@ Then use it three ways:
 > The same catalog is consumed by VS Code and GitHub Copilot. VS Code reads `.claude/settings.json`
 > with identical `extraKnownMarketplaces` and `enabledPlugins` keys, and defers to this
 > `marketplace.json` schema.
+
+### Migrating from `patterson-corp`
+
+This catalog was previously published as `patterson-corp` from
+`patterson-agents/patterson-corp`. A marketplace name is a **flat global namespace** and an install
+identity is the qualified pair `plugin@marketplace`, so the rename changes both — there is no alias
+and no automatic redirect for the marketplace name.
+
+| Was | Now |
+|---|---|
+| `/plugin marketplace add patterson-agents/patterson-corp` | `/plugin marketplace add patterson-agents/patterson-enterprise-plugins` |
+| `patterson-engineering@patterson-corp` | `patterson-engineering@patterson-enterprise-plugins` |
+| `patterson-brand@patterson-corp` | `patterson-brand@patterson-enterprise-plugins` |
+
+Remove the old marketplace, add the new one, and re-enable both plugins. An existing registration
+keeps working against the redirected repository until you remove it, so nothing breaks loudly — it
+simply stops receiving updates under a name that is no longer published. Both plugin names are
+unchanged; only the catalog was renamed. See
+[`docs/decisions/0006-marketplace-rename-to-enterprise-plugins.md`](docs/decisions/0006-marketplace-rename-to-enterprise-plugins.md).
 
 ## Plugin catalog
 
@@ -106,8 +126,8 @@ load when they are actually needed.
 
 <p align="center"><img src="docs/diagrams/layered-model.svg" width="880" alt="Six layers from enterprise down to user, each extending or overriding the one above"></p>
 
-`patterson-corp` is the **enterprise** layer. Lower layers extend it by default and may override it
-when they know better — divergence is treated as information about where a standard is incomplete,
+`patterson-enterprise-plugins` is the **enterprise** layer. Lower layers extend it by default and
+may override it when they know better — divergence is treated as information about where a standard is incomplete,
 not as a violation to suppress.
 
 > [!IMPORTANT]
@@ -116,11 +136,11 @@ not as a violation to suppress.
 
 ## Where it fits
 
-<p align="center"><img src="docs/diagrams/marketplace-topology.svg" width="880" alt="patterson-corp and patterson-labs above patterson-dental and patterson-vet"></p>
+<p align="center"><img src="docs/diagrams/marketplace-topology.svg" width="880" alt="patterson-enterprise-plugins and patterson-labs above patterson-dental and patterson-vet"></p>
 
 | Catalog | Role |
 |---|---|
-| `patterson-corp` | Enterprise — capability true for all of Patterson |
+| `patterson-enterprise-plugins` | Enterprise — capability true for all of Patterson |
 | `patterson-labs` | Incubating — work that has not yet earned durable status |
 | `patterson-dental` | Sub-org — segment-particular capability |
 | `patterson-vet` | Sub-org — segment-particular capability |
@@ -132,7 +152,7 @@ not as a violation to suppress.
 ## Repository layout
 
 ```text
-patterson-corp/
+patterson-enterprise-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json              # the catalog agents read
 ├── plugins/

@@ -1,6 +1,6 @@
 # Design System: Patterson Companies
 
-**Project ID:** `patterson-agents/patterson-corp → plugins/patterson-brand`
+**Project ID:** `patterson-agents/patterson-enterprise-plugins → plugins/patterson-brand`
 
 > [!NOTE]
 > **Substitution note.** `Project ID` is a Google Stitch–native concept (`projects/{numeric}`).

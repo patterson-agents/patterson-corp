@@ -1,7 +1,7 @@
 schema: spec-driven
 
 context: |
-  patterson-corp is the canonical Patterson Companies plugin marketplace for AI coding
+  patterson-enterprise-plugins is the canonical Patterson Companies plugin marketplace for AI coding
   agents (Claude Code, GitHub Copilot, VS Code). It also serves as the OpenSpec planning
   root for the wider patterson-agents program (sibling repos: patterson-labs,
   patterson-dental, patterson-vet, patterson-platform-docs, design-plugins, cli).

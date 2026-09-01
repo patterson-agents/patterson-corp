@@ -1,4 +1,4 @@
-## 1. Governance (this change, `patterson-corp` only)
+## 1. Governance (this change, `patterson-enterprise-plugins` only)
 
 - [ ] 1.1 Record `docs/decisions/0005-branded-doc-sites.md`, Accepted, with the socket gate results
 - [ ] 1.2 Author the `sites/branded-docs` capability spec (this change's delta)
@@ -21,7 +21,7 @@
 
 ## 3. Per-repository site build-out (follow-on work, one workstream per repository)
 
-- [ ] 3.1 `patterson-corp`: scaffold `site/`, pin `astro@7.1.5` + `@astrojs/starlight@0.41.5`,
+- [ ] 3.1 `patterson-enterprise-plugins`: scaffold `site/`, pin `astro@7.1.5` + `@astrojs/starlight@0.41.5`,
       commit `site/bun.lock`, configure `passthroughImageService`, compose the Pages artifact
 - [ ] 3.2 `lab-workshop`: same scaffold, build, and composition steps as 3.1
 - [ ] 3.3 `design-plugins`: same scaffold, build, and composition steps as 3.1; reuse the existing
@@ -48,7 +48,7 @@
 ## 5. Verification
 
 - [ ] 5.1 `openspec validate --all --strict --no-interactive` passes
-- [ ] 5.2 `sh scripts/verify-all.sh` passes in `patterson-corp`
+- [ ] 5.2 `sh scripts/verify-all.sh` passes in `patterson-enterprise-plugins`
 - [ ] 5.3 Confirm no `site/` directory, dependency, or lockfile was actually added by this change --
       it is governance only
 - [ ] 5.4 Confirm every one of the six site repositories has a tracked follow-on task (section 3)

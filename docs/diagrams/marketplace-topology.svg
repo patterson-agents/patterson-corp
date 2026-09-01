@@ -16,7 +16,7 @@
 
   <!-- enterprise -->
   <rect x="30" y="36" width="520" height="150" rx="7" fill="#003767"/>
-  <text class="n" x="50" y="62">patterson-corp</text>
+  <text class="n" x="50" y="62">patterson-enterprise-plugins</text>
   <text class="s" x="50" y="80">capability true for all of Patterson</text>
 
   <rect x="50" y="94" width="235" height="72" rx="5" fill="#ffffff"/>

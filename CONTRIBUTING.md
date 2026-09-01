@@ -1,6 +1,6 @@
-# Contributing to patterson-corp
+# Contributing to patterson-enterprise-plugins
 
-`patterson-corp` is Patterson's enterprise Claude Code plugin marketplace: the capability
+`patterson-enterprise-plugins` is Patterson's enterprise Claude Code plugin marketplace: the capability
 that is true for **all** of Patterson, shipped as installable plugins. This document is
 how a person or an agent proposes a change to it.
 

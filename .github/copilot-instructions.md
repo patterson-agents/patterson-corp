@@ -1,4 +1,4 @@
-# Copilot instructions for patterson-corp
+# Copilot instructions for patterson-enterprise-plugins
 
 This is Patterson's enterprise Claude Code plugin marketplace: the capability true for all
 of Patterson, shipped as installable plugins under `plugins/`. Full detail lives in

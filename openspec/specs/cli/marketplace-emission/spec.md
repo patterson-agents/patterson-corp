@@ -45,7 +45,7 @@ both the `doctor` and `check` commands.
 ### Requirement: Skill provenance emission
 
 `skillGenerator` SHALL emit `_SOURCES.md` and `REFERENCES.md` templates alongside every generated
-skill, matching the provenance convention used in `patterson-corp`.
+skill, matching the provenance convention used in `patterson-enterprise-plugins`.
 
 #### Scenario: Scaffolding a new skill
 

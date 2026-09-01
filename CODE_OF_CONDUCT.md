@@ -2,7 +2,7 @@
 
 ## Our commitment
 
-`patterson-corp` is maintained as part of Patterson Companies' internal engineering
+`patterson-enterprise-plugins` is maintained as part of Patterson Companies' internal engineering
 practice. Contributors are expected to conduct themselves professionally, in a manner
 consistent with Patterson's own employee standards of conduct, whether they are Patterson
 employees, contractors, or automated agents acting on their behalf.

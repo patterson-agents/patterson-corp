@@ -3,7 +3,7 @@ title: The enterprise agent catalog
 description: The enterprise catalog of the Patterson agent platform. Engineering standards and brand identity, encoded as installable agent plugins.
 template: splash
 hero:
-  title: Patterson Corp
+  title: Patterson Enterprise Plugins
   tagline: Patterson's institutional knowledge, encoded as installable agent plugins.
   image:
     alt: Patterson Companies
@@ -42,9 +42,9 @@ when a standard does not cover the situation at hand.
 
 ```bash
 # inside Claude Code
-/plugin marketplace add patterson-agents/patterson-corp
-/plugin install patterson-engineering@patterson-corp
-/plugin install patterson-brand@patterson-corp
+/plugin marketplace add patterson-agents/patterson-enterprise-plugins
+/plugin install patterson-engineering@patterson-enterprise-plugins
+/plugin install patterson-brand@patterson-enterprise-plugins
 ```
 
 Then use it three ways:
@@ -83,7 +83,7 @@ The same catalog is consumed by VS Code and GitHub Copilot, which read the same
 
 ## What is underneath
 
-`patterson-corp` is the **enterprise** layer of a six-layer model. Lower layers extend it by
+`patterson-enterprise-plugins` is the **enterprise** layer of a six-layer model. Lower layers extend it by
 default and may override it when they know better — divergence is treated as information about
 where a standard is incomplete, not as a violation to suppress.
 

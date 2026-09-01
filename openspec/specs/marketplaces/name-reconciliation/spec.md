@@ -8,15 +8,16 @@ remains an open decision because resolving it would break existing installs.
 ### Requirement: Collisions are recorded at the level they occur
 
 The reconciliation decision record SHALL state that Patterson's marketplace `name` values --
-`patterson-corp`, `patterson`, `patterson-skills`, and `patterson-design` -- are distinct and do not
-collide, and SHALL identify the two real collisions as plugin-level.
+`patterson-enterprise-plugins`, `patterson`, `patterson-skills`, and `patterson-design` -- are
+distinct and do not collide, and SHALL identify the two real collisions as plugin-level.
 
 #### Scenario: Reading the decision record
 
 - **WHEN** a reader opens `docs/decisions/0003-plugin-name-reconciliation.md`
 - **THEN** it records that the marketplace-level collision described in HANDOFF.md 1G does not exist
 - **AND** it identifies `patterson-design` as published by both `patterson-marketplace` and `patterson-skills`
-- **AND** it identifies `patterson-brand` as published by both `patterson-corp` and `patterson-design-plugins`
+- **AND** it identifies `patterson-brand` as published by both `patterson-enterprise-plugins` and
+  `patterson-design-plugins`
 - **AND** it states that plugin names resolve first-found-wins, so the second publisher is silently ignored
 
 #### Scenario: Verifying the marketplace names
@@ -47,7 +48,7 @@ decision record SHALL present the collision as decision-needed, with options and
 - **THEN** it states that renaming a published plugin is a breaking change for existing installs
 - **AND** it presents the available options with their consequences
 - **AND** it gives a recommendation while leaving the decision unmade
-- **AND** no rename is applied in `patterson-corp` or `patterson-design-plugins`
+- **AND** no rename is applied in `patterson-enterprise-plugins` or `patterson-design-plugins`
 
 ### Requirement: Local deprecation of patterson-skills
 

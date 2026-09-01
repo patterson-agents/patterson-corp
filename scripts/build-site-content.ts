@@ -43,7 +43,7 @@ const DOCS_OUT = path.join(ROOT, "site", "src", "content", "docs");
 const PUBLIC_OUT = path.join(ROOT, "site", "public");
 
 /** Canonical browse location for a repository-relative path. */
-const BLOB = "https://github.com/patterson-agents/patterson-corp/blob/main/";
+const BLOB = "https://github.com/patterson-agents/patterson-enterprise-plugins/blob/main/";
 
 /** Directories this script owns end-to-end. Removed and rebuilt on every run. */
 const GENERATED_DIRS = [
@@ -365,7 +365,7 @@ function transform(source: string, sourceRel: string): { title?: string; body: s
 }
 
 function sourceFooter(sourceRel: string): string {
-  return `---\n\n_Source of truth: [\`${sourceRel}\`](${BLOB}${sourceRel}) in the \`patterson-corp\` repository._`;
+  return `---\n\n_Source of truth: [\`${sourceRel}\`](${BLOB}${sourceRel}) in the \`patterson-enterprise-plugins\` repository._`;
 }
 
 // ---------------------------------------------------------------------------
@@ -669,8 +669,8 @@ function buildPlugins(): void {
     ...rows,
     "",
     "```text",
-    "/plugin marketplace add patterson-agents/patterson-corp",
-    ...pluginNames.map((plugin) => `/plugin install ${plugin}@patterson-corp`),
+    "/plugin marketplace add patterson-agents/patterson-enterprise-plugins",
+    ...pluginNames.map((plugin) => `/plugin install ${plugin}@patterson-enterprise-plugins`),
     "```",
     "",
     "Every skill page on this site is generated from that skill's own `SKILL.md`, and every",
@@ -681,7 +681,7 @@ function buildPlugins(): void {
   emitPage({
     out: "plugins/index.md",
     title: "Plugin catalog",
-    description: "The installable plugins in the patterson-corp enterprise catalog, and the skills inside each.",
+    description: "The installable plugins in the patterson-enterprise-plugins enterprise catalog, and the skills inside each.",
     order: 0,
     label: "Catalog",
     body,

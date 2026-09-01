@@ -2,7 +2,7 @@
 
 ## Reporting a vulnerability
 
-Report suspected vulnerabilities in `patterson-corp` privately, never through a public
+Report suspected vulnerabilities in `patterson-enterprise-plugins` privately, never through a public
 GitHub issue.
 
 Use GitHub's [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability)

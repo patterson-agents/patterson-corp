@@ -64,8 +64,8 @@ finding, ranks by severity, and will not invent a rule.
 
 ```bash
 # inside Claude Code
-/plugin marketplace add patterson-agents/patterson-corp
-/plugin install patterson-brand@patterson-corp
+/plugin marketplace add patterson-agents/patterson-enterprise-plugins
+/plugin install patterson-brand@patterson-enterprise-plugins
 ```
 
 > [!NOTE]

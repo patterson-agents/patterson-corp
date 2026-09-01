@@ -24,7 +24,7 @@ three together are the actual guarantee.
 - `pretooluse-guard.ts` (`Write|Edit`): secrets, Dockerfile base images.
 - `house-standards-guard.ts` (`Bash|Write|Edit`): the supply-chain denylist.
 
-Any repository or machine that enables `patterson-engineering@patterson-corp` gets both.
+Any repository or machine that enables `patterson-engineering@patterson-enterprise-plugins` gets both.
 `PATTERSON_ENGINEERING_HOOKS=off` disables blocking (would-block notes still print); both
 guards fail open on internal error. This tier is strong friction with a clear message, not a
 security boundary — a user can disable the plugin.

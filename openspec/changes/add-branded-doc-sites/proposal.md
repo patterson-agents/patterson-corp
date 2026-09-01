@@ -1,7 +1,7 @@
 ## Why
 
 Six Patterson repositories publish GitHub Pages sites on custom domains
-(`lab-workshop`, `patterson-corp`, `design-plugins`, `patterson-platform-docs`,
+(`lab-workshop`, `patterson-enterprise-plugins`, `design-plugins`, `patterson-platform-docs`,
 `patterson-academy`, `patterson-design-system`), and all six are hand-authored static HTML stubs
 with no theme, no shared components, and no generator. Daniel directed rebuilding all six as
 high-quality branded sites. `docs/decisions/0005-branded-doc-sites.md` records that decision and
@@ -28,8 +28,8 @@ wording down to what is actually still true.
   `site/` toolchain is the documented exception (ADR 0005)" instead of an absolute that a compliant
   `site/` directory would falsify.
 - **`.github/dependabot.yml`** gains an `npm` ecosystem entry scoped to `/site` (weekly, grouped)
-  alongside the existing `github-actions` entry, so `patterson-corp`'s own future `site/` carries
-  dependency update coverage from day one.
+  alongside the existing `github-actions` entry, so `patterson-enterprise-plugins`'s own future
+  `site/` carries dependency update coverage from day one.
 
 ## Capabilities
 
@@ -49,8 +49,8 @@ documented requirement's behavior.
 ## Non-goals
 
 - **No `site/` scaffolding.** This change does not create `site/` or add the `astro` /
-  `@astrojs/starlight` dependencies in `patterson-corp` or in any of the six site repositories --
-  it is the spec and governance layer those per-repository workstreams build against, tracked
+  `@astrojs/starlight` dependencies in `patterson-enterprise-plugins` or in any of the six site
+  repositories -- it is the spec and governance layer those per-repository workstreams build against, tracked
   separately as follow-on work in `tasks.md`.
 - **No `scripts/verify-all.sh` edits.** Excluding `site/`'s lockfile and `node_modules` from the
   no-binaries, size-budget, and forbidden-content scans is the parallel gate-hardening change's
@@ -63,11 +63,11 @@ documented requirement's behavior.
 
 ## Impact
 
-- `patterson-corp`: `docs/decisions/0005-branded-doc-sites.md` (new), `openspec/specs/sites/branded-docs/`
-  (new capability, via this change's delta spec), `.github/copilot-instructions.md`,
+- `patterson-enterprise-plugins`: `docs/decisions/0005-branded-doc-sites.md` (new),
+  `openspec/specs/sites/branded-docs/` (new capability, via this change's delta spec), `.github/copilot-instructions.md`,
   `.github/copilot-setup-steps.yml`, `.github/ISSUE_TEMPLATE/new-plugin-proposal.yml`,
   `.github/ISSUE_TEMPLATE/new-skill-proposal.yml`, `.github/dependabot.yml`.
-- Downstream, non-code impact: the six site repositories (`lab-workshop`, `patterson-corp`,
+- Downstream, non-code impact: the six site repositories (`lab-workshop`, `patterson-enterprise-plugins`,
   `design-plugins`, `patterson-platform-docs`, `patterson-academy`, `patterson-design-system`) each
   need their own `site/` scaffold, dependency install, and Pages-workflow composition work to satisfy
   the `sites/branded-docs` requirements this change defines; that build-out is out of scope here and

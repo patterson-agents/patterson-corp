@@ -3,7 +3,7 @@
 ## Purpose
 Defines the structural baseline that every Patterson sibling marketplace repository satisfies --
 labs, dental, and vet -- and the incubation-to-canonical promotion path that governs when work
-graduates from `patterson-labs` into `patterson-corp`.
+graduates from `patterson-labs` into `patterson-enterprise-plugins`.
 ## Requirements
 ### Requirement: Sibling repositories are structurally complete
 
@@ -32,8 +32,8 @@ name replaces the existing entry rather than coexisting with it.
 
 #### Scenario: Comparing marketplace names across the org
 
-- **WHEN** the marketplace `name` values of `patterson-corp`, `patterson-labs`, `patterson-dental`,
-  `patterson-vet`, `patterson-marketplace`, and `patterson-skills` are collected
+- **WHEN** the marketplace `name` values of `patterson-enterprise-plugins`, `patterson-labs`,
+  `patterson-dental`, `patterson-vet`, `patterson-marketplace`, and `patterson-skills` are collected
 - **THEN** every value is unique
 - **AND** no sibling reuses a name already published by another repository
 
@@ -64,13 +64,13 @@ forbidden content. The tests SHALL be written before the files they validate.
 ### Requirement: Documented promotion path
 
 `patterson-labs` SHALL provide `docs/promotion-path.md` describing how an incubating artifact
-graduates to `patterson-corp`.
+graduates to `patterson-enterprise-plugins`.
 
 #### Scenario: An incubating plugin is considered for graduation
 
 - **WHEN** a maintainer consults `docs/promotion-path.md`
 - **THEN** it states the criteria an artifact meets before graduating
-- **AND** it names `patterson-corp` as the canonical destination
+- **AND** it names `patterson-enterprise-plugins` as the canonical destination
 - **AND** it records `[TBD: not specified in HANDOFF.md 1F]` for any graduation criterion the source
   does not define
 

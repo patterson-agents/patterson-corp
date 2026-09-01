@@ -89,8 +89,8 @@ visible in a repository. See the `scripts/README.md` in each.
 Add the marketplace and enable the plugin:
 
 ```sh
-claude plugin marketplace add patterson-agents/patterson-corp
-claude plugin install patterson-engineering@patterson-corp
+claude plugin marketplace add patterson-agents/patterson-enterprise-plugins
+claude plugin install patterson-engineering@patterson-enterprise-plugins
 ```
 
 Or, for a local checkout, add to `.claude/settings.json` in your project:
@@ -98,11 +98,11 @@ Or, for a local checkout, add to `.claude/settings.json` in your project:
 ```json
 {
   "extraKnownMarketplaces": {
-    "patterson-corp": {
-      "source": { "source": "github", "repo": "patterson-agents/patterson-corp" }
+    "patterson-enterprise-plugins": {
+      "source": { "source": "github", "repo": "patterson-agents/patterson-enterprise-plugins" }
     }
   },
-  "enabledPlugins": { "patterson-engineering@patterson-corp": true }
+  "enabledPlugins": { "patterson-engineering@patterson-enterprise-plugins": true }
 }
 ```
 
